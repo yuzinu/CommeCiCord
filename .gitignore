@@ -28,5 +28,5 @@
 
 # Ignore JS dependencies and bundled assets
 node_modules/
-bundle.js
+bundle.js*
 bundle.js.map
