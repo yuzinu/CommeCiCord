@@ -19,6 +19,7 @@ const App = () => (
       <Link to="/" >
         <h1>CommeCiCord</h1>
       </Link>
+      <GreetingContainer />
     </header>
     <Switch>
       <ProtectedRoute path="/" component={GreetingContainer} />
