@@ -5,6 +5,7 @@ class SessionForm extends React.Component {
     super(props);
     this.state = {
       username: '',
+      email: '',
       password: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,8 +36,22 @@ class SessionForm extends React.Component {
   }
 
   render() {
+    let username;
+    if (this.props.formType === "signup") {
+      username = (
+      <>
+      <label>Username:
+        <input type="text"
+          value={this.state.username}
+          onChange={this.update('username')}
+        />
+      </label>
+      <br />
+      </>
+      );
+    }
     return (
-      <div className="login-form-container">
+      <div>
         <form onSubmit={this.handleSubmit} >
           Welcome to CommeCiCord!
           <br/>
@@ -44,23 +59,22 @@ class SessionForm extends React.Component {
           {this.renderErrors()}
           <div>
             <br/>
-            <label>Username:
+            <label>Email:
               <input type="text"
-                value={this.state.username}
-                onChange={this.update('username')}
-                className="login-input"
+                value={this.state.email}
+                onChange={this.update('email')}
               />
             </label>
-            <br/>
+            <br />
+            {username}
             <label>Password:
               <input type="password"
                 value={this.state.password}
                 onChange={this.update('password')}
-                className="login-input"
               />
             </label>
             <br/>
-            <input className="session-submit" type="submit" value={this.props.formType} />
+            <input type="submit" value={this.props.formType} />
           </div>
         </form>
       </div>
