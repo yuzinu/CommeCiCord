@@ -15,6 +15,10 @@ class SessionForm extends React.Component {
     this.demoLogin = this.demoLogin.bind(this);
   }
 
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
+
   update(field) {
     return e => {
       let value = e.currentTarget.value;
@@ -35,7 +39,7 @@ class SessionForm extends React.Component {
         if (value.length === 0) {
           this.setState({ passwordError: "- This field is required"});
         } else if (value.length < 6) {
-          this.setState({ passwordError: "- This password is too short."})
+          this.setState({ passwordError: "- This password is too short."});
         } else {
           this.setState({ passwordError: "" });
         }
@@ -47,7 +51,10 @@ class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user);
+    if (this.state.emailError.length === 0 &&
+        this.state.passwordError.length === 0) {
+      this.props.processForm(user);
+    }
   }
 
   demoLogin(e) {
@@ -80,15 +87,17 @@ class SessionForm extends React.Component {
   }
 
   renderErrors() {
-    return(
-      <ul>
-        {this.props.errors.map((error, i) => (
-          <li className="error" key={`error-${i}`}>
-            {error}
-          </li>
-        ))}
-      </ul>
-    );
+    if (this.state.passwordError.length === 0) {
+      return(
+        <ul>
+          {this.props.errors.map((error, i) => (
+            <li className="error" key={`error-${i}`}>
+              {error}
+            </li>
+          ))}
+        </ul>
+      );
+    };
   }
 
   render() {
@@ -97,7 +106,9 @@ class SessionForm extends React.Component {
         <Link to={"/"}>
           <div className="login-logo">
             <img className="navbar-logo-image" src={discord_logo_inverted}></img>
-            <img className= "navbar-logo-text" src="https://fontmeme.com/permalink/200923/bf32472e03e05a52072248b6b7fa7fb1.png"></img>
+            <img className= "navbar-logo-text"
+              src="https://fontmeme.com/permalink/200923/bf32472e03e05a52072248b6b7fa7fb1.png">
+            </img>
           </div>
         </Link>
         <div className="auth-box">
@@ -107,7 +118,11 @@ class SessionForm extends React.Component {
               <h3 className="login-form-message">We're so excited to see you again!</h3>
               <div>
                 <div className="login-form-email">
-                  <label className={`login-form-title ${this.errorTitle("email")}`}>EMAIL<h1 className="render-error">{this.state.emailError}</h1></label>
+                  <label className={`login-form-title ${this.errorTitle("email")}`}>EMAIL
+                    <h1 className="render-error">
+                      {this.state.emailError}
+                    </h1>
+                  </label>
                   <input className={`${this.errorInput("email")}`}
                     type="text"
                     value={this.state.email}
@@ -118,9 +133,12 @@ class SessionForm extends React.Component {
                   />
                 </div>
                 <div className="login-form-field">
-                  <label className={`login-form-title ${this.errorTitle("password")}`}>PASSWORD<h1 
-                    className="render-error">{this.state.passwordError}</h1></label>
-                  {this.renderErrors()}
+                  <label className={`login-form-title ${this.errorTitle("password")}`}>PASSWORD
+                    <h1 className="render-error">
+                      {this.state.passwordError}
+                      <h5 className="backend-error">{this.renderErrors()}</h5>
+                    </h1>
+                  </label>
                   <input className={`${this.errorInput("password")}`}
                     type="password"
                     value={this.state.password}

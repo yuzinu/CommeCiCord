@@ -16,6 +16,10 @@ class SignUpForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
+
   update(field) {
     return e => {
       let value = e.currentTarget.value;
@@ -59,7 +63,11 @@ class SignUpForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user);
+    if (this.state.emailError.length === 0 && 
+        this.state.usernameError.length === 0 &&
+        this.state.passwordError.length === 0) {
+      this.props.processForm(user);
+    }
   }
 
   errorTitle(field) {
@@ -87,47 +95,43 @@ class SignUpForm extends React.Component {
   }
 
   renderErrors() {
-    return(
-      <ul>
-        {this.props.errors.map((error, i) => (
-          <li className="error" key={`error-${i}`}>
-            {error}
-          </li>
-        ))}
-      </ul>
-    );
+    if (this.state.passwordError.length === 0) {
+      this.errorInput("password"); // TODO THIS DOESN'T WORK BECAUSE IT'S ONLY RETURNING CLASSNAME
+      return(
+        <ul>
+          {this.props.errors.map((error, i) => (
+            <li className="error" key={`error-${i}`}>
+              {error}
+            </li>
+          ))}
+        </ul>
+      );
+    };
   }
 
   render() {
-    let username;
-    if (this.props.formType === "Continue") {
-      username = (
-        <>
-        <label>Username:
-          <input type="text"
-            value={this.state.username}
-            onChange={this.update('username')}
-          />
-        </label>
-        </>
-      );
-    }
     return (
       <div className="auth-page">
         <Link to={"/"}>
           <div className="login-logo">
             <img className="navbar-logo-image" src={discord_logo_inverted}></img>
-            <img className= "navbar-logo-text" src="https://fontmeme.com/permalink/200923/bf32472e03e05a52072248b6b7fa7fb1.png"></img>
+            <img
+              className= "navbar-logo-text"
+              src="https://fontmeme.com/permalink/200923/bf32472e03e05a52072248b6b7fa7fb1.png">
+            </img>
           </div>
         </Link>
         <div className="signup-box">
           <div className="login-box">
             <form className="login-form" onSubmit={this.handleSubmit} >
               <h1 className="login-form-welcome">Create an account</h1>
-              {/* <h3 className="login-form-message">We're so excited to see you again!</h3> */}
               <div>
                 <div className="login-form-email">
-                  <label className={`login-form-title ${this.errorTitle("email")}`}>EMAIL<h1 className="render-error">{this.state.emailError}</h1></label>
+                  <label className={`login-form-title ${this.errorTitle("email")}`}>EMAIL
+                    <h1 className="render-error">
+                      {this.state.emailError}
+                    </h1>
+                  </label>
                   <input className={`${this.errorInput("email")}`}
                     type="text"
                     value={this.state.email}
@@ -138,8 +142,11 @@ class SignUpForm extends React.Component {
                   />
                 </div>
                 <div className="login-form-email">
-                  <label className={`login-form-title ${this.errorTitle("username")}`}>USERNAME<h1 className="render-error">{this.state.usernameError}</h1></label>
-                  {this.renderErrors()}
+                  <label className={`login-form-title ${this.errorTitle("username")}`}>USERNAME
+                    <h1 className="render-error">
+                      {this.state.usernameError}
+                    </h1>
+                  </label>
                   <input className={`${this.errorInput("username")}`}
                     type="username"
                     value={this.state.username}
@@ -149,8 +156,12 @@ class SignUpForm extends React.Component {
                   />
                 </div>
                 <div className="login-form-email">
-                  <label className={`login-form-title ${this.errorTitle("password")}`}>PASSWORD<h1 className="render-error">{this.state.passwordError}</h1></label>
-                  {this.renderErrors()}
+                  <label className={`login-form-title ${this.errorTitle("password")}`}>PASSWORD
+                    <h1 className="render-error">
+                      {this.state.passwordError}
+                      <h5 className="backend-error">{this.renderErrors()}</h5>
+                    </h1>
+                  </label>
                   <input className={`${this.errorInput("password")}`}
                     type="password"
                     value={this.state.password}
