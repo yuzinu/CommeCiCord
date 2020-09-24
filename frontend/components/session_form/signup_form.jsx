@@ -90,7 +90,7 @@ class SignUpForm extends React.Component {
     return(
       <ul>
         {this.props.errors.map((error, i) => (
-          <li key={`error-${i}`}>
+          <li className="error" key={`error-${i}`}>
             {error}
           </li>
         ))}
@@ -164,7 +164,7 @@ class SignUpForm extends React.Component {
                   <Link to="/login">
                     <h5 className="signup-swap-form">Already have an account?</h5>
                   </Link>
-                  <h5 className="signup-tos">By registering, you agree to CommeCiCord's <Link to={"/"}>Terms of Service</Link> and <Link to={"/"}>Privacy Policy.</Link></h5>
+                  <h5 className="signup-tos">By registering, you agree to CommeCiCord's <Link href={"https://www.discord.com"}>Terms of Service</Link> and <Link to={"/"}>Privacy Policy.</Link></h5>
                 </div>
               </div>
             </form>
