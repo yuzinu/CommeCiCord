@@ -4,7 +4,7 @@
   background-color: skyblue;
   height: 100vh;
   justify-content: center;
-  background-image: url("discord_auth_background");
+  background: image-url("discord_auth_background.jpg");
 }
 
 .login-logo {
@@ -37,6 +37,7 @@
 
 .qr-box {
   display: flex;
+  flex-direction: column;
   background: inherit;
   width: 240px;
   height: 344px;
@@ -202,4 +203,27 @@
   align-self: center;
   text-align: justify;
   text-justify: inter-cluster;
+}
+
+.demo-login-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 16px;
+  margin-bottom: 8px;
+  font-size: 15px;
+  line-height: 38px;
+  font-weight: 600;
+  width: 100%;
+  height: 44px;
+  box-sizing: border-box;
+  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 3px;
+  color: #DCDDDE;
+  background-color: #7289DA;;
+  flex: 1 1 100%;
+  &:hover {
+    background-color: #677BC4;
+    transition: background-color .2s ease-in-out;
+  }
 }

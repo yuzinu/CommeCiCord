@@ -5,7 +5,6 @@ class SessionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
       email: '',
       password: '',
       emailError: '',
@@ -13,6 +12,7 @@ class SessionForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.demoLogin = this.demoLogin.bind(this);
   }
 
   update(field) {
@@ -50,6 +50,15 @@ class SessionForm extends React.Component {
     this.props.processForm(user);
   }
 
+  demoLogin(e) {
+    e.preventDefault();
+    const user = {
+      email: "junipoo@test.com",
+      password: "junipoo"
+    };
+    this.props.processForm(user);
+  }
+
   errorTitle(field) {
     if (field === "email" && this.state.emailError !== "") {
       return "error";
@@ -83,19 +92,6 @@ class SessionForm extends React.Component {
   }
 
   render() {
-    let username;
-    if (this.props.formType === "Continue") {
-      username = (
-        <>
-        <label>Username:
-          <input type="text"
-            value={this.state.username}
-            onChange={this.update('username')}
-          />
-        </label>
-        </>
-      );
-    }
     return (
       <div className="auth-page">
         <Link to={"/"}>
@@ -144,6 +140,7 @@ class SessionForm extends React.Component {
               </div>
             </form>
             <div className="qr-box">
+              <button className="demo-login-button" onClick={this.demoLogin}>DEMO USER LOGIN</button>
               <h1 className="temp-qr-message">May or may not have a QR code implemented in the future! This section is currently a placeholder in order to achieve pixel perfect UI!</h1>
             </div>
           </div>
