@@ -12,11 +12,18 @@ class SessionForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    // this.renderErrors = this.renderErrors.bind(this); // TODO backend error handling
     this.demoLogin = this.demoLogin.bind(this);
   }
 
   componentWillUnmount() {
     this.props.clearErrors();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.errors.length > 0) {
+      this.props.clearErrors();
+    }
   }
 
   update(field) {
@@ -64,12 +71,15 @@ class SessionForm extends React.Component {
       password: "junipoo"
     };
     this.props.processForm(user);
+    this.renderErrors();
   }
 
   errorTitle(field) {
-    if (field === "email" && this.state.emailError !== "") {
+    const backendField = field[0].toUpperCase() + field.slice(1);
+    const backendError = this.props.errors.findIndex(error => error.includes(backendField)) !== -1;
+    if (field === "email" && this.state.emailError !== "" || backendError) {
       return "error";
-    } else if (field === "password" && this.state.passwordError !== "") {
+    } else if (field === "password" && this.state.passwordError !== "" || backendError) {
       return "error";
     } else {
       return "";
@@ -77,15 +87,23 @@ class SessionForm extends React.Component {
   }
 
   errorInput(field) {
-    if (field === "email" && this.state.emailError !== "") {
+    const backendField = field[0].toUpperCase() + field.slice(1);
+    const backendError = this.props.errors.findIndex(error => error.includes(backendField)) !== -1;
+    if (field === "email" && this.state.emailError !== "" || backendError) {
       return "error-box";
-    } else if (field === "password" && this.state.passwordError !== "") {
+    } else if (field === "password" && this.state.passwordError !== "" || backendError) {
       return "error-box";
     } else {
       return "login-form-input";
     }
   }
 
+  // renderErrors() { // TODO BACKEND ERROR HANDLING
+  //   debugger;
+  //   this.setState({emailError: this.props.errors[0].emailError,
+  //                  passwordError: this.props.errors[0].passwordError
+  //                 });
+  // }
   renderErrors() {
     if (this.state.passwordError.length === 0) {
       return(
@@ -136,7 +154,7 @@ class SessionForm extends React.Component {
                   <label className={`login-form-title ${this.errorTitle("password")}`}>PASSWORD
                     <h1 className="render-error">
                       {this.state.passwordError}
-                      <h5 className="backend-error">{this.renderErrors()}</h5>
+                      <span className="backend-error">{this.renderErrors()}</span>
                     </h1>
                   </label>
                   <input className={`${this.errorInput("password")}`}
