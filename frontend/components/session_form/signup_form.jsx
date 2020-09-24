@@ -96,7 +96,7 @@ class SignUpForm extends React.Component {
 
   renderErrors() {
     if (this.state.passwordError.length === 0) {
-      this.errorInput("password"); // TODO THIS DOESN'T WORK BECAUSE IT'S ONLY RETURNING CLASSNAME
+      // TODO THIS DOESN'T WORK BECAUSE IT'S ONLY RETURNING CLASSNAME
       return(
         <ul>
           {this.props.errors.map((error, i) => (
