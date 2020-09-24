@@ -8,21 +8,19 @@ import {
   HashRouter
 } from 'react-router-dom';
 
-import GreetingContainer from './greeting/greeting_container';
+import Splash from './splash/splash_container';
 import SignUpFormContainer from './session_form/signup_form_container';
-import LogInFormContainer from './session_form/login_form_container';
+import SessionFormContainer from './session_form/session_form_container';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
 const App = () => (
   <div>
     <header>
-      <Link to="/" >
-        <h1>CommeCiCord</h1>
-      </Link>
-      <GreetingContainer />
     </header>
     <Switch>
-      <AuthRoute exact path="/login" component={LogInFormContainer} />
+      <Route exact path="/" component={Splash} />
+      <AuthRoute exact path="/channels/@me" component={SessionFormContainer} />
+      <AuthRoute exact path="/login" component={SessionFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
     </Switch>
   </div>

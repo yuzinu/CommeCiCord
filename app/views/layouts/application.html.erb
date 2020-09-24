@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CommeCi</title>
+    <title><%= "CommeCiCord | Your Place to Talk and Hang Out" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <%= favicon_link_tag asset_path('discord_favicon.ico') %>
+    <script type="text/javascript">
+      window.discord_logo_inverted = "<%= image_url('discord_logo_inverted') %>"
+      window.discord_auth_bg = "<%= image_url('discord_auth_background') %>"
+    </script>
   </head>
 
   <body>
