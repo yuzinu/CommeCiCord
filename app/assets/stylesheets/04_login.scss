@@ -120,6 +120,7 @@
 }
 
 .login-forgot {
+  margin-right: auto;
   margin-top: 4px;
   margin-bottom: 20px;
   padding: 2px 0;
@@ -128,6 +129,9 @@
   &:hover {
     text-decoration: underline;
     cursor: pointer;
+  }
+  &:focus {
+    text-decoration: underline;
   }
 }
 
@@ -177,6 +181,10 @@
     background-color: #677BC4;
     transition: background-color .2s ease-in-out;
   }
+  &:focus {
+    background-color: #677BC4;
+    transition: background-color .2s ease-in-out;
+  }
 }
 
 .login-need {
@@ -195,6 +203,9 @@
   &:hover {
     text-decoration: underline;
     cursor: pointer;
+  }
+  &:focus {
+    text-decoration: underline;
   }
 }
 
@@ -224,6 +235,10 @@
   background-color: #7289DA;;
   flex: 1 1 100%;
   &:hover {
+    background-color: #677BC4;
+    transition: background-color .2s ease-in-out;
+  }
+  &:focus {
     background-color: #677BC4;
     transition: background-color .2s ease-in-out;
   }

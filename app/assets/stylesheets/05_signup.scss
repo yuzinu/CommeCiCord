@@ -31,6 +31,9 @@
     text-decoration: underline;
     cursor: pointer;
   }
+  &:focus {
+    text-decoration: underline;
+  }
 }
 
 .signup-tos {
@@ -41,6 +44,9 @@
     color: #7289DA;
     padding: 0 3px;
     &:hover {
+      text-decoration: underline;
+    }
+    &:focus {
       text-decoration: underline;
     }
   }

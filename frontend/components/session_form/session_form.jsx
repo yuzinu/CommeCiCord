@@ -12,17 +12,21 @@ class SessionForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.renderErrors = this.renderErrors.bind(this); // TODO backend error handling
+    this.renderErrors = this.renderErrors.bind(this); // TODO MORE CUSTOM BACKEND ERROR HANDLING
     this.demoLogin = this.demoLogin.bind(this);
   }
+
+  // componentDidMount() {
+  //   this.props.clearErrors();
+  // }
 
   componentWillUnmount() {
     this.props.clearErrors();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.errors.length > 0) {
-      this.props.clearErrors();
+  componentDidUpdate(prevProps) {
+    if (prevProps.errors !== this.props.errors) {
+      this.renderErrors();
     }
   }
 
@@ -71,15 +75,14 @@ class SessionForm extends React.Component {
       password: "junipoo"
     };
     this.props.processForm(user);
-    this.renderErrors();
   }
 
   errorTitle(field) {
-    const backendField = field[0].toUpperCase() + field.slice(1);
-    const backendError = this.props.errors.findIndex(error => error.includes(backendField)) !== -1;
-    if (field === "email" && this.state.emailError !== "" || backendError) {
+    // const backendField = field[0].toUpperCase() + field.slice(1);
+    // const backendError = this.props.errors.findIndex(error => error.includes(backendField)) !== -1;
+    if (field === "email" && this.state.emailError !== "") {
       return "error";
-    } else if (field === "password" && this.state.passwordError !== "" || backendError) {
+    } else if (field === "password" && this.state.passwordError !== "") {
       return "error";
     } else {
       return "";
@@ -87,35 +90,37 @@ class SessionForm extends React.Component {
   }
 
   errorInput(field) {
-    const backendField = field[0].toUpperCase() + field.slice(1);
-    const backendError = this.props.errors.findIndex(error => error.includes(backendField)) !== -1;
-    if (field === "email" && this.state.emailError !== "" || backendError) {
+    // const backendField = field[0].toUpperCase() + field.slice(1);
+    // const backendError = this.props.errors.findIndex(error => error.includes(backendField)) !== -1;
+    if (field === "email" && this.state.emailError !== "") {
       return "error-box";
-    } else if (field === "password" && this.state.passwordError !== "" || backendError) {
+    } else if (field === "password" && this.state.passwordError !== "") {
       return "error-box";
     } else {
       return "login-form-input";
     }
   }
 
-  // renderErrors() { // TODO BACKEND ERROR HANDLING
-  //   debugger;
-  //   this.setState({emailError: this.props.errors[0].emailError,
-  //                  passwordError: this.props.errors[0].passwordError
-  //                 });
-  // }
-  renderErrors() {
-    if (this.state.passwordError.length === 0) {
-      return(
-        <ul>
-          {this.props.errors.map((error, i) => (
-            <li className="error" key={`error-${i}`}>
-              {error}
-            </li>
-          ))}
-        </ul>
-      );
+  mapErrorsToState() {
+    let email = "";
+    let password = "";
+
+    this.props.errors.forEach((error) => {
+      if (error.includes("Email")) {
+        email = "- " + error;
+      } else if (error.includes("Password")) {
+        password = "- " + error;
+      }
+    });
+
+    return {
+      emailError: email,
+      passwordError: password
     };
+  }
+
+  renderErrors() {
+    this.setState(this.mapErrorsToState());
   }
 
   render() {
@@ -154,7 +159,8 @@ class SessionForm extends React.Component {
                   <label className={`login-form-title ${this.errorTitle("password")}`}>PASSWORD
                     <h1 className="render-error">
                       {this.state.passwordError}
-                      <span className="backend-error">{this.renderErrors()}</span>
+                      {/* <span className="backend-error">{this.renderErrors()}</span>
+                        USED TO RENDER ERRORS SEPARATELY BEFORE CREATING MAPERRORSTOSTATE*/}
                     </h1>
                   </label>
                   <input className={`${this.errorInput("password")}`}
@@ -165,12 +171,13 @@ class SessionForm extends React.Component {
                     required
                   />
                 </div>
-                <h5 className="login-forgot">Forgot your password?</h5>
+                <Link to={"/login"} className="login-forgot">Forgot your password?</Link>
                 <button className="login-button">{this.props.formType}</button>
                 <div className="login-need">
                   <h5>Need an account?</h5>
-                  <Link to="/signup">
-                    <h5 className="login-swap-form">Register</h5>
+                  <Link
+                    to={"/signup"}
+                    className="login-swap-form">Register
                   </Link>
                 </div>
               </div>

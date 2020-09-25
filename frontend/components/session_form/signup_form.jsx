@@ -14,15 +14,16 @@ class SignUpForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
   }
 
   componentWillUnmount() {
     this.props.clearErrors();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.errors.length > 0) {
-      this.props.clearErrors();
+  componentDidUpdate(prevProps) {
+    if (prevProps.errors !== this.props.errors) {
+      this.renderErrors();
     }
   }
 
@@ -77,13 +78,15 @@ class SignUpForm extends React.Component {
   }
 
   errorTitle(field) {
-    const backendField = field[0].toUpperCase() + field.slice(1);
-    const backendError = this.props.errors.findIndex(error => error.includes(backendField)) !== -1;
-    if (field === "email" && this.state.emailError !== "" || backendError) {
+    // const backendField = field[0].toUpperCase() + field.slice(1);
+    // const backendError = this.props.errors.findIndex(error => error.includes(backendField)) !== -1; // This is a boolean
+    // if (field === "email" && this.state.emailError !== "" || backendError) {
+    //   return "error-box";
+    if (field === "email" && this.state.emailError !== "") {
       return "error";
-    } else if (field === "username" && this.state.usernameError !== "" || backendError) {
+    } else if (field === "username" && this.state.usernameError !== "") {
       return "error";
-    } else if (field === "password" && this.state.passwordError !== "" || backendError) {
+    } else if (field === "password" && this.state.passwordError !== "") {
       return "error";
     } else {
       return "";
@@ -91,34 +94,43 @@ class SignUpForm extends React.Component {
   }
 
   errorInput(field) {
-    const backendField = field[0].toUpperCase() + field.slice(1);
-    const backendError = this.props.errors.findIndex(error => error.includes(backendField)) !== -1;
-    if (field === "email" && this.state.emailError !== "" || backendError) {
+    // const backendField = field[0].toUpperCase() + field.slice(1);
+    // const backendError = this.props.errors.findIndex(error => error.includes(backendField)) !== -1;
+    if (field === "email" && this.state.emailError !== "") {
       return "error-box";
-    } else if (field === "username" && this.state.usernameError !== "" || backendError) {
+    } else if (field === "username" && this.state.usernameError !== "") {
       return "error-box";
-    } else if (field === "password" && this.state.passwordError !== "" || backendError) {
+    } else if (field === "password" && this.state.passwordError !== "") {
       return "error-box";
     } else {
       return "login-form-input";
     }
   }
 
-  renderErrors() {
-    if (this.state.passwordError.length === 0) {
-      /* TODO THIS DOESN'T WORK BECAUSE IT'S ONLY RETURNING CLASSNAME
-          NEED TO HAVE AN ERROR FILTER IN ORDER TO RENDER EACH ERROR APPROPRIATELY
-      */
-      return(
-        <ul>
-          {this.props.errors.map((error, i) => (
-            <li className="error" key={`error-${i}`}>
-              {error}
-            </li>
-          ))}
-        </ul>
-      );
+  mapErrorsToState() {
+    let email = "";
+    let username = "";
+    let password = "";
+
+    this.props.errors.forEach((error) => {
+      if (error.includes("Email")) {
+        email = "- " + error;
+      } else if (error.includes("Username")) {
+        username = "- " + error;
+      } else if (error.includes("Password")) {
+        password = "- " + error;
+      }
+    });
+
+    return {
+      emailError: email,
+      usernameError: username,
+      passwordError: password
     };
+  }
+
+  renderErrors() {
+    this.setState(this.mapErrorsToState());
   }
 
   render() {
@@ -171,7 +183,6 @@ class SignUpForm extends React.Component {
                   <label className={`login-form-title ${this.errorTitle("password")}`}>PASSWORD
                     <h1 className="render-error">
                       {this.state.passwordError}
-                      <span className="backend-error">{this.renderErrors()}</span>
                     </h1>
                   </label>
                   <input className={`${this.errorInput("password")}`}
@@ -184,8 +195,9 @@ class SignUpForm extends React.Component {
                 </div>
                 <button className="login-button">{this.props.formType}</button>
                 <div className="already-signup">
-                  <Link to="/login">
-                    <h5 className="signup-swap-form">Already have an account?</h5>
+                  <Link
+                    to={"/login"}
+                    className="signup-swap-form">Already have an account?
                   </Link>
                   <h5 className="signup-tos">By registering, you agree to CommeCiCord's <a href={"https://www.discord.com"}>Terms of Service</a> and <Link to={"/"}>Privacy Policy.</Link></h5>
                 </div>
