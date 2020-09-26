@@ -44,5 +44,8 @@
   "bugs": {
     "url": "https://github.com/yuzinu/CommeCiCord/issues"
   },
-  "homepage": "https://github.com/yuzinu/CommeCiCord#readme"
+  "homepage": "https://github.com/yuzinu/CommeCiCord#readme",
+  "devDependencies": {
+    "svg-url-loader": "^6.0.0"
+  }
 }

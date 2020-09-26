@@ -1,11 +1,14 @@
 .hero {
   font-family: 'Whitney Medium', "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: #3061EC;
-  height: 500px;
+  // background: #ffffff;
+  // background: #3061EC;
+  // height: 600px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
+  position: absolute;
+  z-index: 15;
 }
 
 .hero li {

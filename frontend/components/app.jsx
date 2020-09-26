@@ -11,6 +11,7 @@ import {
 import Splash from './splash/splash_container';
 import SignUpFormContainer from './session_form/signup_form_container';
 import SessionFormContainer from './session_form/session_form_container';
+import AuthForm from './session_form/auth_form';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
 const App = () => (

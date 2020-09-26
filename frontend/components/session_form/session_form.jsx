@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// import SessionAni from '../session_ani/session_ani';
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -74,7 +75,7 @@ class SessionForm extends React.Component {
       email: "junipoo@test.com",
       password: "junipoo"
     };
-    this.props.processForm(user);
+    this.setState(user, () => {this.props.processForm(user)});
   }
 
   errorTitle(field) {
@@ -125,70 +126,72 @@ class SessionForm extends React.Component {
 
   render() {
     return (
-      <div className="auth-page">
-        <Link to={"/"}>
-          <div className="login-logo">
-            <img className="navbar-logo-image" src={discord_logo_inverted}></img>
-            <img className= "navbar-logo-text"
-              src="https://fontmeme.com/permalink/200923/bf32472e03e05a52072248b6b7fa7fb1.png">
-            </img>
-          </div>
-        </Link>
-        <div className="auth-box">
-          <div className="login-box">
-            <form className="login-form" onSubmit={this.handleSubmit} >
-              <h1 className="login-form-welcome">Welcome back!</h1>
-              <h3 className="login-form-message">We're so excited to see you again!</h3>
-              <div>
-                <div className="login-form-email">
-                  <label className={`login-form-title ${this.errorTitle("email")}`}>EMAIL
-                    <h1 className="render-error">
-                      {this.state.emailError}
-                    </h1>
-                  </label>
-                  <input className={`${this.errorInput("email")}`}
-                    type="text"
-                    value={this.state.email}
-                    onChange={this.update('email')}
-                    placeholder="test@test.com"
-                    autoFocus
-                    required
-                  />
+      <>
+        <div className="auth-page">
+          <Link to={"/"}>
+            <div className="login-logo">
+              <img className="navbar-logo-image" src={discord_logo_inverted}></img>
+              <img className= "navbar-logo-text"
+                src="https://fontmeme.com/permalink/200923/bf32472e03e05a52072248b6b7fa7fb1.png">
+              </img>
+            </div>
+          </Link>
+          <div className="auth-box">
+            <div className="login-box">
+              <form className="login-form" onSubmit={this.handleSubmit} >
+                <h1 className="login-form-welcome">Welcome back!</h1>
+                <h3 className="login-form-message">We're so excited to see you again!</h3>
+                <div>
+                  <div className="login-form-email">
+                    <label className={`login-form-title ${this.errorTitle("email")}`}>EMAIL
+                      <h1 className="render-error">
+                        {this.state.emailError}
+                      </h1>
+                    </label>
+                    <input className={`${this.errorInput("email")}`}
+                      type="text"
+                      value={this.state.email}
+                      onChange={this.update('email')}
+                      placeholder="test@test.com"
+                      autoFocus
+                      required
+                    />
+                  </div>
+                  <div className="login-form-field">
+                    <label className={`login-form-title ${this.errorTitle("password")}`}>PASSWORD
+                      <h1 className="render-error">
+                        {this.state.passwordError}
+                        {/* <span className="backend-error">{this.renderErrors()}</span>
+                          USED TO RENDER ERRORS SEPARATELY BEFORE CREATING MAPERRORSTOSTATE*/}
+                      </h1>
+                    </label>
+                    <input className={`${this.errorInput("password")}`}
+                      type="password"
+                      value={this.state.password}
+                      onChange={this.update('password')}
+                      placeholder={`\u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022`}
+                      required
+                    />
+                  </div>
+                  <Link to={"/login"} className="login-forgot">Forgot your password?</Link>
+                  <button className="login-button">{this.props.formType}</button>
+                  <div className="login-need">
+                    <h5>Need an account?</h5>
+                    <Link
+                      to={"/signup"}
+                      className="login-swap-form">Register
+                    </Link>
+                  </div>
                 </div>
-                <div className="login-form-field">
-                  <label className={`login-form-title ${this.errorTitle("password")}`}>PASSWORD
-                    <h1 className="render-error">
-                      {this.state.passwordError}
-                      {/* <span className="backend-error">{this.renderErrors()}</span>
-                        USED TO RENDER ERRORS SEPARATELY BEFORE CREATING MAPERRORSTOSTATE*/}
-                    </h1>
-                  </label>
-                  <input className={`${this.errorInput("password")}`}
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.update('password')}
-                    placeholder={`\u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022`}
-                    required
-                  />
-                </div>
-                <Link to={"/login"} className="login-forgot">Forgot your password?</Link>
-                <button className="login-button">{this.props.formType}</button>
-                <div className="login-need">
-                  <h5>Need an account?</h5>
-                  <Link
-                    to={"/signup"}
-                    className="login-swap-form">Register
-                  </Link>
-                </div>
+              </form>
+              <div className="qr-box">
+                <button className="demo-login-button" onClick={this.demoLogin}>DEMO USER LOGIN</button>
+                <h1 className="temp-qr-message">May or may not have a QR code implemented in the future! This section is currently a placeholder in order to achieve pixel perfect UI!</h1>
               </div>
-            </form>
-            <div className="qr-box">
-              <button className="demo-login-button" onClick={this.demoLogin}>DEMO USER LOGIN</button>
-              <h1 className="temp-qr-message">May or may not have a QR code implemented in the future! This section is currently a placeholder in order to achieve pixel perfect UI!</h1>
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }
