@@ -2,28 +2,28 @@
   font-family: "Whitney";
   font-style: normal;
   font-weight: 100;
-  src: local("Whitney"), local("Whitney-Light"), url("/assets/Whiteney_Light.woff") format("woff");
+  src: local("Whitney"), local("Whitney-Light"), font-url("Whitney_Light.woff") format("woff");
 }
 
 @font-face {
   font-family: "Whitney";
   font-style: normal;
   font-weight: 400;
-  src: local("Whitney"), local("Whitney-Normal"), url("/assets/Whitney_Normal.woff") format("woff");
+  src: local("Whitney"), local("Whitney-Normal"), font-url("Whitney_Normal.woff") format("woff");
 }
 
 @font-face {
   font-family: "Whitney";
   font-style: normal;
   font-weight: 700;
-  src: local("Whitney"), local("Whitney-Bold"), url("/assets/Whitney_Bold.woff") format("woff");
+  src: local("Whitney"), local("Whitney-Bold"), font-url("Whitney_Bold.woff") format("woff");
 }
 
 @font-face {
   font-family: "Whitney";
   font-style: normal;
   font-weight: 900;
-  src: local("Whitney"), local("Whitney-Bolder"), url("/assets/Whitney_Bolder.woff") format("woff");
+  src: local("Whitney"), local("Whitney-Bolder"), font-url("Whitney_Bolder.woff") format("woff");
 }
 
 /* cyrillic-ext */
