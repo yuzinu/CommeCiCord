@@ -29,12 +29,12 @@ class NavBar extends React.Component {
   render() {
     return (
       <React.Fragment>
-          <Link to={"/"}>
-            <div className="navbar-logo">
-              <img className="navbar-logo-image" src={discord_logo_inverted}></img>
-              <img className="navbar-logo-text" src="https://fontmeme.com/permalink/200923/bf32472e03e05a52072248b6b7fa7fb1.png"></img>
-            </div>
-          </Link>
+        <Link to={"/"}>
+          <div className="navbar-logo">
+            <img className="navbar-logo-image" src={discord_logo_inverted}></img>
+            <img className="navbar-logo-text" src="https://fontmeme.com/permalink/200923/bf32472e03e05a52072248b6b7fa7fb1.png"></img>
+          </div>
+        </Link>
         <ul>
           <li><Link to={"/"}><button>Download</button></Link></li>
           <li><Link to={"/"}><button>Why CommeCiCord?</button></Link></li>
