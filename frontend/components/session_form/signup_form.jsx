@@ -38,7 +38,9 @@ class SignUpForm extends React.Component {
                    (value.split(".").length !== 2) ||
                    (value.indexOf(".") === value.length - 1) ||
                    (value.indexOf("@") > value.indexOf(".")) ||
-                   value.length < 5) {
+                   (value.indexOf("@") === value.indexOf(".") - 1) ||
+                   (value.indexOf(" ") !== -1) ||
+                   (value.length < 5)) {
           this.setState({ emailError: "- Not a well formed email address."});
         } else {
           this.setState({ emailError: ""});
