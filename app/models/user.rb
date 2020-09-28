@@ -21,6 +21,10 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
+  has_many :servers,
+    class_name: :Server,
+    foreign_key: :owner_id
+
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     user && user.is_password?(password) ? user : nil

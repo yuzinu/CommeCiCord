@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Typed from 'typed.js';
 // import SessionAni from '../session_ani/session_ani';
 
 class SessionForm extends React.Component {
@@ -73,11 +74,29 @@ class SessionForm extends React.Component {
 
   demoLogin(e) {
     e.preventDefault();
-    const user = {
-      email: "junipoo@test.com",
-      password: "junipoo"
+    const demo_email = {
+      strings: ["junipoo@test.com"],
+      typeSpeed: 56, 
     };
-    this.setState(user, () => {this.props.processForm(user)});
+    const demo_password = {
+      strings: ["junipoo"],
+      typeSpeed: 56, 
+    };
+
+    new Typed(".demo-email", demo_email);
+
+    setTimeout(() => {
+      new Typed(".demo-password", demo_password);
+    }, 1600);
+
+    setTimeout(() => {
+      this.props.processForm({ email: "junipoo@test.com", password: "junipoo" });
+    }, 2400);
+
+    // this.setState(user, () => {
+    //   const timer = setTimeout(() => this.props.processForm(user), 450);
+    //   return () => clearTimeout(timer);
+    // });
   }
 
   errorTitle(field) {
@@ -150,7 +169,7 @@ class SessionForm extends React.Component {
                         {this.state.emailError}
                       </h1>
                     </label>
-                    <input className={`${this.errorInput("email")}`}
+                    <input className={`${this.errorInput("email")} demo-email`}
                       type="text"
                       value={this.state.email}
                       onChange={this.update('email')}
@@ -167,7 +186,7 @@ class SessionForm extends React.Component {
                           USED TO RENDER ERRORS SEPARATELY BEFORE CREATING MAPERRORSTOSTATE*/}
                       </h1>
                     </label>
-                    <input className={`${this.errorInput("password")}`}
+                    <input className={`${this.errorInput("password")} demo-password`}
                       type="password"
                       value={this.state.password}
                       onChange={this.update('password')}
