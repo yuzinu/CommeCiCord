@@ -90,7 +90,12 @@ class SessionForm extends React.Component {
     }, 1600);
 
     setTimeout(() => {
-      this.props.processForm({ email: "junipoo@test.com", password: "junipoo" });
+      this.props.processForm({
+        email: "junipoo@test.com",
+        password: "junipoo",
+        emailError: '',
+        passwordError: ''
+      });
     }, 2400);
 
     // this.setState(user, () => {
