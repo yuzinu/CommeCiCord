@@ -14,7 +14,6 @@ class ServersController < ApplicationController
     end
   end
 
-  def 
   private
 
   def server_params
