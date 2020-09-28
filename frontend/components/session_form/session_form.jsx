@@ -93,8 +93,6 @@ class SessionForm extends React.Component {
       this.props.processForm({
         email: "junipoo@test.com",
         password: "junipoo",
-        emailError: '',
-        passwordError: ''
       });
     }, 2400);
 
