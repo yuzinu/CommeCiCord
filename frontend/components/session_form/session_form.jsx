@@ -96,10 +96,10 @@ class SessionForm extends React.Component {
       });
     }, 2400);
 
-    // this.setState(user, () => {
-    //   const timer = setTimeout(() => this.props.processForm(user), 450);
-    //   return () => clearTimeout(timer);
-    // });
+    this.setState(user, () => {
+      const timer = setTimeout(() => this.props.processForm(user), 450);
+      return () => clearTimeout(timer);
+    });
   }
 
   errorTitle(field) {

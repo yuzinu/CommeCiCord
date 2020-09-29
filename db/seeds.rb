@@ -28,7 +28,7 @@ user1.avatar.attach(
 
 server1 = Server.create!(
   name: "pubstomperz",
-  owner_id: 1
+  owner_id: user1.id
 );
 
 server1_icon = open(
@@ -40,3 +40,21 @@ server1.icon.attach(
   filename: 'pubstomperz_icon.jpeg', 
   content_type: 'image/jpeg'
 );
+
+membership1 = Membership.create(
+  member_id: user1.id,
+  joinable_id: server1.id,
+  joinable_type: "Server"
+)
+
+channel1 = Channel.create(
+  name: "general",
+  server_id: server1.id
+)
+
+message1 = Message.create(
+  body: "Welcome to the fam!",
+  author_id: user1.id,
+  messageable_id: channel1.id,
+  messageable_type: "Channel"
+)
