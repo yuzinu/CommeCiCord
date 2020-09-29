@@ -4,7 +4,7 @@ class Api::ChannelsController < ApplicationController
   end
 
   def show
-    @channel = Channel.find(params[:id])
+    @channel = Channel.includes(:messages).find(params[:id])
     if @channel
       render :show
     else

@@ -1,6 +1,15 @@
 class Api::UsersController < ApplicationController
   def index
-    @users = User.all
+    @users = User.with_attached_avatar.includes(:own_servers).all
+  end
+
+  def show
+    @user = User.with_attached_avatar.includes(:own_servers).find(params[:id])
+    if @user
+      render :show
+    else
+      render json: ["User does not exist"], status: 404
+    end
   end
 
   def create

@@ -1,10 +1,10 @@
 class Api::ServersController < ApplicationController
   def index
-    @servers = Server.all
+    @servers = Server.with_attached_icon.includes(:channels).all
   end
 
   def show
-    @server = Server.find(params[:id])
+    @server = Server.with_attached_icon.includes(:channels).find(params[:id])
     if @server
       render :show
     else

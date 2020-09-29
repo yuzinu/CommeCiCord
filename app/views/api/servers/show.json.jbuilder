@@ -4,7 +4,8 @@ end
 
 json.channels do
   @server.channels.each do |channel|
-    json.extract! #all channel stuff
+    json.partial! "api/channels/channel", channel: channel
   end
 end
+
 #channel.messages.create(body:"",author_id:1)
