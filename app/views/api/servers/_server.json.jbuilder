@@ -2,9 +2,8 @@ json.extract! server, :id
 json.owner server.owner_id
 json.extract! server, :name
 json.icon url_for(server.icon) if server.icon.attached?
-json.channels do
-  json.array! server.channel_ids
-end
+json.members server.members.ids
+json.channels server.channel_ids
 
 # servers: {
 #   1: {

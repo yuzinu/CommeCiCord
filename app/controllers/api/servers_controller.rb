@@ -1,6 +1,6 @@
 class Api::ServersController < ApplicationController
   def index
-    @servers = Server.with_attached_icon.includes(:channels).all
+    @servers = Server.with_attached_icon.includes(:channels, :members).all
   end
 
   def show
@@ -53,6 +53,6 @@ class Api::ServersController < ApplicationController
   private
 
   def server_params
-    params.require(:server).permit(:name, :owner_id)
+    params.require(:server).permit(:name, :owner_id, :icon)
   end
 end

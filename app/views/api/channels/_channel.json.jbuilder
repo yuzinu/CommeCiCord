@@ -1,9 +1,7 @@
 json.extract! channel, :id
 json.server channel.server_id
 json.extract! channel, :name
-json.messages do
-  json.array! channel.message_ids
-end
+json.messages channel.message_ids
 
 # channels: {
 #   1: {

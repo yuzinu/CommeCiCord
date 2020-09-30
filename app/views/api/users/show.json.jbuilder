@@ -1,5 +1,3 @@
-json.user do
-  json.partial! "api/users/user", user: @user
-end
+json.partial! "api/users/user", user: @user
 
 #channel.messages.create(body:"",author_id:1)

@@ -2,14 +2,14 @@ import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
 import Hero from './hero';
 
-const mapStateToProps = ({ session, entities }) => {
+const mSTP = ({ session, entities: { users } }) => {
   return {
-    currentUser: entities.users[session.id]
+    currentUser: users[session.id]
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mDTP = dispatch => ({
   logout: () => dispatch(logout())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Hero);
+export default connect(mSTP, mDTP)(Hero);

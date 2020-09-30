@@ -1,68 +1,56 @@
-import * as ReportAPIUtil from '../util/user_api_util';
+import * as ServerAPI from '../util/server_api_util';
 
-export const RECEIVE_REPORTS = 'RECEIVE_REPORTS';
-export const RECEIVE_REPORT = 'RECEIVE_REPORT';
-export const REMOVE_REPORT = 'REMOVE_REPORT';
+export const RECEIVE_ALL_SERVERS = 'RECEIVE_ALL_SERVERS';
+export const RECEIVE_SERVER = 'RECEIVE_SERVER';
+export const REMOVE_SERVER = 'REMOVE_SERVER';
 
-const receiveReports = (reports) => {
+const receiveServers = (servers) => {
   return {
-    type: RECEIVE_REPORTS,
-    reports
+    type: RECEIVE_ALL_SERVERS,
+    servers
   };
 };
 
-const receiveReport = (report) => {
+const receiveServer = (server) => {
   return {
-    type: RECEIVE_REPORT,
-    report
+    type: RECEIVE_SERVER,
+    server
   };
 };
 
-const removeReport = (reportId) => {
+const removeServer = (serverId) => {
   return {
-    type: REMOVE_REPORT,
-    reportId
+    type: REMOVE_SERVER,
+    serverId
   };
 };
 
-/*
-Export the following thunk action creators with the specified parameters:
-
-1. `requestReports`
-2. `requestReport(reportId)`
-3. `createReport(report)`
-4. `updateReport(report)`
-5. `deleteReport(reportId)`
-*/
-
-export const requestReports = () => dispatch => {
+export const fetchServers = () => dispatch => {
   return (
-    ReportAPIUtil.fetchReports().then(reports => dispatch(receiveReports(reports)))
+    ServerAPI.fetchServers().then(servers => dispatch(receiveServers(servers)))
   );
 };
 
-export const requestReport = (reportId) => dispatch => {
+export const fetchServer = (serverId) => dispatch => {
   return (
-    ReportAPIUtil.fetchReport(reportId).then(report => dispatch(receiveReport(report)))
+    ServerAPI.fetchServer(serverId).then(server => dispatch(receiveServer(server)))
   );
 };
 
-export const createReport = (report) => dispatch => {
+export const createServer = (server) => dispatch => {
   return (
-    ReportAPIUtil.createReport(report).then(report => dispatch(receiveReport(report)))
+    ServerAPI.createServer(server).then(server => dispatch(receiveServer(server)))
   );
 };
 
-export const updateReport = (report) => dispatch => {
+export const updateServer = (server) => dispatch => {
   return (
-    ReportAPIUtil.updateReport(report).then(report => dispatch(receiveReport(report)))
+    ServerAPI.updateServer(server).then(server => dispatch(receiveServer(server)))
   );
 };
 
-
-
-export const deleteReport = (reportId) => dispatch => {
+export const deleteServer = (serverId) => dispatch => {
   return (
-    ReportAPIUtil.deleteReport(reportId).then(() => dispatch(removeReport(reportId)))
+    ServerAPI.deleteServer(serverId).then(() => dispatch(removeServer(serverId)))
   );
 };
