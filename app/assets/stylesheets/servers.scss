@@ -1,3 +1,46 @@
-// Place all the styles related to the servers controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.server-wrapper {
+  width: 72px;
+  height: 100vh;
+  background-color: gray;
+  overflow: hidden;
+}
+
+.server-bar {
+  display: flex;
+  flex-direction: column;
+  // flex-wrap: wrap;
+  width: 72px;
+  height: 100vh;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  background-color: gray;
+}
+
+.server-list {
+  flex-direction: column;
+  flex: inherit;
+  width: inherit;
+}
+
+.server-icon {
+  display: flex;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  &:hover {
+    border-radius: 25%;
+    cursor: pointer;
+  }
+}
+
+.icon-padding {
+  padding: 0 12px 8px;
+}
+
+.add-server {
+  background-color: slategrey;
+  display: flex;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}

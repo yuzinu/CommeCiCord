@@ -1,0 +1,45 @@
+.main-messages, .message-wrapper {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: gray;
+}
+
+.message-bar {
+  display: flex;
+  flex-direction: column;
+  // flex-wrap: wrap;
+  width: inherit;
+  height: 100vh;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  background-color: gray;
+}
+
+.message-list {
+  flex-direction: column;
+  flex: inherit;
+  width: inherit;
+}
+
+// .message-icon {
+//   display: flex;
+//   width: 48px;
+//   height: 48px;
+//   border-radius: 50%;
+//   &:hover {
+//     border-radius: 25%;
+//   }
+// }
+
+.icon-padding {
+  padding: 0 12px 8px;
+}
+
+// .add-message {
+//   background-color: slategrey;
+//   display: flex;
+//   width: 48px;
+//   height: 48px;
+//   border-radius: 50%;
+// }

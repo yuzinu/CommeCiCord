@@ -68,7 +68,8 @@ class SessionForm extends React.Component {
     const user = Object.assign({}, this.state);
     if (this.state.emailError.length === 0 &&
         this.state.passwordError.length === 0) {
-      this.props.processForm(user);
+      this.props.processForm(user)
+        .then(() => this.props.history.push("/channels/@me"));
     }
   }
 
@@ -93,7 +94,7 @@ class SessionForm extends React.Component {
       this.props.processForm({
         email: "junipoo@test.com",
         password: "junipoo",
-      });
+      }).then(() => this.props.history.push("/channels/@me"));
     }, 2400);
 
     // this.setState(user, () => {

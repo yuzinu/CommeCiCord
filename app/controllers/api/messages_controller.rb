@@ -14,8 +14,8 @@ class Api::MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params)
-    @message.channel_id = params[:channel_id]
-    if channel.server.owner.id == current_user.id
+    @message.channel_id = params[:message][:channel_id]
+    if message.author.id == current_user.id
       if @channel.save
         render :show
       else
@@ -53,6 +53,6 @@ class Api::MessagesController < ApplicationController
   end
 
   def channel_params
-    params.require(:channel).permit(:title, :stanzas, :complete)
+    params.require(:channel).permit(:body, :author_id, :messageable_id, :messageable_type)
   end
 end

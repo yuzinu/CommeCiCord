@@ -1,6 +1,7 @@
 class Api::ChannelsController < ApplicationController
   def index
     @channels = Channel.all
+    render :index
   end
 
   def show
@@ -14,8 +15,8 @@ class Api::ChannelsController < ApplicationController
 
   def create
     @channel = Channel.new(channel_params)
-    @channel.server_id = params[:server_id]
-    if channel.server.owner.id == current_user.id
+    @channel.server_id = params[:channel][:server_id]
+    if @channel.server.owner.id == current_user.id
       if @channel.save
         render :show
       else
@@ -53,6 +54,6 @@ class Api::ChannelsController < ApplicationController
   end
 
   def channel_params
-    params.require(:channel).permit(:title, :stanzas, :complete)
+    params.require(:channel).permit(:name, :server_id)
   end
 end

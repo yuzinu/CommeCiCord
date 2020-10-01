@@ -8,23 +8,25 @@ import {
   HashRouter
 } from 'react-router-dom';
 
-import Splash from './splash/splash_container';
+import Modal from './modal/modal';
+import MainContainer from './main_container';
+import SplashContainer from './splash/splash_container';
 import SignUpFormContainer from './session_form/signup_form_container';
 import SessionFormContainer from './session_form/session_form_container';
 import AuthForm from './session_form/auth_form';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
 const App = () => (
-  <div>
-    <header>
-    </header>
+  <>
+    <Modal />
+    <ProtectedRoute exact path="/channels/@me" component={MainContainer} />
     <Switch>
-      <Route exact path="/" component={Splash} />
-      <ProtectedRoute exact path="/channels/@me" component={SessionFormContainer} />
+      <ProtectedRoute exact path="/channels/:serverId/:channelId" component={MainContainer} />
       <AuthRoute exact path="/login" component={SessionFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
     </Switch>
-  </div>
+    <Route exact path="/" component={SplashContainer} />
+  </>
 );
 
 export default App;

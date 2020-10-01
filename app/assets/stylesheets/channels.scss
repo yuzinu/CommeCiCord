@@ -1,0 +1,64 @@
+.main-channels, .channel-wrapper {
+  width: 240px;
+  height: 100vh;
+  overflow: hidden;
+  background-color: slategray;
+}
+
+.channel-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // flex-wrap: wrap;
+  width: inherit;
+  height: 100vh;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  background-color: slategray;
+}
+
+.current-channel {
+  position: sticky;
+  height: 30px;
+  top: 0;
+  overflow: hidden;
+  width: 220px;
+  background-color: slategray;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.channel-list-wrapper {
+  flex-direction: column;
+  flex: inherit;
+  width: 240px;
+}
+
+.channel-list {
+  flex-direction: column;
+  flex: inherit;
+  width: 240px;
+}
+
+// .channel-icon {
+//   display: flex;
+//   width: 48px;
+//   height: 48px;
+//   border-radius: 50%;
+//   &:hover {
+//     border-radius: 25%;
+//   }
+// }
+
+.icon-padding {
+  padding: 0 12px 8px;
+}
+
+.add-channel {
+  position: sticky;
+  bottom: 0;
+  background-color: slategrey;
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+}

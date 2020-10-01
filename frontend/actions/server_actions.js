@@ -15,6 +15,8 @@ const receiveServer = (server) => {
   return {
     type: RECEIVE_SERVER,
     server
+    // server: payload.server,
+    // channels: payload.channels
   };
 };
 

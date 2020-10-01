@@ -4,7 +4,7 @@ class Api::ServersController < ApplicationController
   end
 
   def show
-    @server = Server.with_attached_icon.includes(:channels).find(params[:id])
+    @server = Server.with_attached_icon.includes(:channels).find_by(id: params[:id])
     if @server
       render :show
     else
@@ -16,7 +16,7 @@ class Api::ServersController < ApplicationController
     @server = Server.new(server_params)
     @server.owner_id = current_user.id
     if @server.save
-      Membership.create({})
+      Membership.create({member_id: current_user.id, joinable: @server})
       Channel.create({name: "general", server_id: @server.id})
       render :show
     else
