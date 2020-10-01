@@ -24,15 +24,25 @@ class ServerIndexItem extends React.Component {
   // use dynamic selector
   render() {
     const server = this.props.server;
-    return (
-      // <Link to={`${server.id}/${server.channels[0].id}`}>
+    const initials = server.name.split(" ").map(name => name[0]).join(" ").toUpperCase();
+    
+    if (server.icon) {// <Link to={`${server.id}/${server.channels[0].id}`}>
+      return (
         <img 
-          onClick={this.handleClick}
-          className="server-icon"
-          src={server.icon}>
+        onClick={this.handleClick}
+        className="server-icon"
+        src={server.icon}>
         </img>
-      // </Link>
-    )
+      )
+    } else {
+      return (
+        <h1
+          onClick={this.handleClick}
+          className="server-initials">
+          {initials}
+        </h1>
+      )
+    }
   }
 }
 

@@ -38,7 +38,9 @@ class ServerIndex extends React.Component {
     return (
       <div className="server-wrapper">
         <div className="server-bar">
-          <h1 className="server-icon">I am the user button</h1>
+          <div className="icon-padding">
+            <img className="user-icon" src={this.props.currentUser.avatar}></img>
+          </div>
           <ul className="server-list">
             {servers.map(server => {
               return (
