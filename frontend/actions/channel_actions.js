@@ -21,7 +21,7 @@ const receiveChannel = (channel) => {
 // 
 const removeChannel = (channelId) => {
   return {
-    type: REMOVE_channel,
+    type: REMOVE_CHANNEL,
     channelId
   };
 };
@@ -30,9 +30,9 @@ export const clearChannels = () => ({
   type: CLEAR_CHANNELS,
 });
 
-export const fetchChannels = () => dispatch => {
+export const fetchChannels = (serverId) => dispatch => {
   return (
-    ChannelAPI.fetchChannels().then(channels => dispatch(receiveChannels(channels)))
+    ChannelAPI.fetchChannels(serverId).then(channels => dispatch(receiveChannels(channels)))
   );
 };
 

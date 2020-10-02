@@ -1,7 +1,9 @@
-export const fetchMessages = () => (
+export const fetchMessages = (channelId) => (
   $.ajax({
     method: 'GET',
-    url: `/api/messages`
+    url: `/api/messages`,
+    data: {messageable_type: "Channel",
+           messageable_id: `${channelId}`}
   })
 );
 

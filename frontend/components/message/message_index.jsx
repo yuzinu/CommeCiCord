@@ -2,14 +2,19 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import MessageIndexItem from './message_index_item';
 import { openModal, closeModal } from '../../actions/modal_actions';
+import ChatRoomContainer from '../message_form/chatroom_container';
 
 class MessageIndex extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      channel_id: parseInt(props.match.params.channelId)
+    }
     // this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
+    // this.props.fetchMessages(this.state.channelId);
     this.props.fetchChannel(parseInt(this.props.match.params.channelId));
     // .then(() => (
     // this.state.entities.servers[parseInt(this.props.match.params.serverId)].channels.forEach(channel => {
@@ -18,16 +23,15 @@ class MessageIndex extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // debugger;
     if (prevProps.location !== this.props.location) {
       this.props.clearMessages();
+      // this.props.fetchMessages(this.state.channelId);
       this.props.fetchChannel(parseInt(this.props.match.params.channelId));
       // this.setState({messages: []});
     }
   }
 
   // componentWillUnmount() {
-  //   debugger;
   //   // this.props.clearMessages();
   // }
 
@@ -38,10 +42,9 @@ class MessageIndex extends React.Component {
 
   render() {
     const messages = this.props.messages;
-    // debugger;
-    if (messages.length < 1) {
-      return null;
-    }
+    // if (messages.length < 1) {
+    //   return null;
+    // }
 
     return (
       <div className="message-wrapper">
@@ -63,6 +66,9 @@ class MessageIndex extends React.Component {
               )
             })}
           </ul>
+        </div>
+        <div>
+          <ChatRoomContainer/>
         </div>
       </div>
     )

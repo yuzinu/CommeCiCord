@@ -30,9 +30,9 @@ export const clearMessages = () => ({
   type: CLEAR_MESSAGES,
 });
 
-export const fetchMessages = () => dispatch => {
+export const fetchMessages = (channelId) => dispatch => {
   return (
-    MessageAPI.fetchMessages().then(messages => dispatch(receiveMessages(messages)))
+    MessageAPI.fetchMessages(channelId).then(messages => dispatch(receiveMessages(messages)))
   );
 };
 

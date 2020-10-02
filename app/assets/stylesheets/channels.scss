@@ -1,5 +1,5 @@
 .main-channels, .channel-wrapper {
-  width: 240px;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
   background-color: slategray;
@@ -10,7 +10,7 @@
   flex-direction: column;
   justify-content: space-between;
   // flex-wrap: wrap;
-  width: inherit;
+  width: 240px;
   height: 100vh;
   overflow-y: scroll;
   scrollbar-width: none;

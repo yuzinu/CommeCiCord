@@ -23,11 +23,11 @@ class Main extends React.Component {
               {/* <ProtectedRoute exact path="/channels/@me" component={FriendContainer}/> */}
             </Switch>
           </div>
-          <div className="main-messages">
+          {/* <div className="main-messages">
             <Switch>
               <ProtectedRoute exact path="/channels/:serverId/:channelId" component={MessageIndexContainer} />
             </Switch>
-          </div>
+          </div> */}
         </div>
       </>
     )

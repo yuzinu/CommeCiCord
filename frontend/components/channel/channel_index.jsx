@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import ChannelIndexItem from './channel_index_item';
+import ChatRoomContainer from '../message_form/chatroom_container';
 import { openModal, closeModal } from '../../actions/modal_actions';
 
 class ChannelIndex extends React.Component {
@@ -8,15 +9,15 @@ class ChannelIndex extends React.Component {
     super(props);
     this.state = {
       name: "",
-      server_id: parseInt(this.props.match.params.serverId)
+      server_id: this.props.match.params.serverId
     }
     // this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    // debugger;
     this.props.fetchServer(parseInt(this.props.match.params.serverId));
+    // this.props.fetchChannels(this.props.match.params.serverId);
     // .then(() => (
     // this.state.entities.servers[parseInt(this.props.match.params.serverId)].channels.forEach(channel => {
     //   this.props.fetchChannel(channel.id);
@@ -26,6 +27,7 @@ class ChannelIndex extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.location !== this.props.location) {
       this.props.clearChannels();
+      // this.props.fetchChannels(this.props.match.params.serverId);
       this.props.fetchServer(parseInt(this.props.match.params.serverId));
     }
   }
@@ -46,17 +48,31 @@ class ChannelIndex extends React.Component {
   }
 
   render() {
-    const channels = this.props.channels;
-    let display;    
-    if (channels.length < 1) {
+    const [servers, channels] = [this.props.servers, this.props.channels];
+    
+    let display;
+    if (servers.length < 1) {
       display = "";
       return null;
     } else {
-      let channel = channels.find(channel => channel.id === parseInt(this.props.match.params.channelId));
-      if (channel){
-        display = channel.name;
+      let server = servers.find(server => server.id === parseInt(this.props.match.params.serverId));
+      if (server) {
+        display = server.name;
       }
     }
+    // debugger;
+    
+    // const [servers, channels] = [this.props.servers, this.props.channels];
+    // let display;    
+    // if (channels.length < 1) {
+    //   display = "";
+    //   return null;
+    // } else {
+    //   let channel = channels.find(channel => channel.id === parseInt(this.props.match.params.channelId));
+    //   if (channel){
+    //     display = channel.name;
+    //   }
+    // }
     // const channel = Object.values[this.props.channels][this.props.match.params.channelId];
     return (
       <div className="channel-wrapper">
@@ -88,6 +104,9 @@ class ChannelIndex extends React.Component {
               onChange={this.update("name")}/>
             <button>Create</button>
           </form>
+        </div>
+        <div className="message-wrapper">
+          <ChatRoomContainer />
         </div>
       </div>
     )

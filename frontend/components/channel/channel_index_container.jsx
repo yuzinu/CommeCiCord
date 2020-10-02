@@ -5,17 +5,18 @@ import { fetchServer } from '../../actions/server_actions';
 import { logout } from '../../actions/session_actions';
 import ChannelIndex from './channel_index';
 
-const mSTP = ({ session, entities: { users, channels } }) => {
+const mSTP = ({ session, entities: { users, servers, channels } }) => {
   return {
     currentUser: users[session.id],
-    channels: Object.values(channels)
+    channels: Object.values(channels),
+    servers: Object.values(servers)
   };
 };
 
 const mDTP = dispatch => {
   return {
     fetchServer: (id) => dispatch(fetchServer(id)).then(promise => promise.server.channels.forEach(id => dispatch(fetchChannel(id)))), //????????????????????????
-    fetchChannels: () => dispatch(fetchChannels()),
+    fetchChannels: (server_id) => dispatch(fetchChannels(server_id)),
     fetchChannel: (id) => dispatch(fetchChannel(id)),
     createChannel: (channel) => dispatch(createChannel(channel)),
     updateChannel: (channel) => dispatch(updateChannel(channel)),

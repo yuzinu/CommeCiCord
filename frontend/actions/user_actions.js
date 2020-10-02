@@ -1,29 +1,34 @@
-// import * as ServerAPI from '../util/server_api_util';
+import * as UserAPI from "../util/user_api_util";
 
-// export const RECEIVE_ALL_SERVERS = 'RECEIVE_ALL_SERVERS';
-// export const RECEIVE_SERVER = 'RECEIVE_SERVER';
-// export const REMOVE_SERVER = 'REMOVE_SERVER';
+export const RECEIVE_ALL_USERS = "RECEIVE_ALL_USERS";
+export const RECEIVE_USER = "RECEIVE_USER";
 
-// const receiveServers = (servers) => {
-//   return {
-//     type: RECEIVE_ALL_SERVERS,
-//     servers
-//   };
-// };
+const receiveUsers = (users) => {
+  return {
+    type: RECEIVE_ALL_USERS,
+    users
+  }
+};
 
-// const receiveServer = (server) => {
-//   return {
-//     type: RECEIVE_SERVER,
-//     server
-//   };
-// };
+const receiveUser = (user) => {
+  return {
+    type: RECEIVE_USER,
+    user
+  }
+}
 
-// const removeServer = (serverId) => {
-//   return {
-//     type: REMOVE_SERVER,
-//     serverId
-//   };
-// };
+export const fetchUsers = () => dispatch => {
+  return UserAPI.fetchUsers()
+    .then(users => {
+      dispatch(receiveUsers(users))
+    });
+}
+
+export const updateUser = (user) => dispatch => {
+ 
+  return UserAPI.updateUser(user)
+    .then(user => dispatch(receiveUser(user)))
+}
 
 // export const fetchServers = () => dispatch => {
 //   return (

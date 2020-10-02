@@ -1,0 +1,19 @@
+.chatroom-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  justify-content: center;
+}
+.message-list {
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+  border: solid gray 1px;
+}
+
+.load-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

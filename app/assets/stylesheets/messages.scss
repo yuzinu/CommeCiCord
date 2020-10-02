@@ -5,6 +5,10 @@
   background-color: gray;
 }
 
+.message-wrapper {
+  justify-content: space-between;
+}
+
 .message-bar {
   display: flex;
   flex-direction: column;
