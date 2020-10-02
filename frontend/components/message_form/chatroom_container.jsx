@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import ChatRoom from './ChatRoom';
+import ChatRoom from './chatroom';
 import { fetchMessages, deleteMessage, createMessage, fetchMessage } from '../../actions/message_actions';
 import { withRouter } from 'react-router-dom';
 import { fetchUsers } from '../../actions/user_actions';
