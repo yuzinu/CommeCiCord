@@ -60,7 +60,6 @@ class ChannelIndex extends React.Component {
         display = server.name;
       }
     }
-    // debugger;
     
     // const [servers, channels] = [this.props.servers, this.props.channels];
     // let display;    

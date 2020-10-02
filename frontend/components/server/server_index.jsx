@@ -39,7 +39,10 @@ class ServerIndex extends React.Component {
       <div className="server-wrapper">
         <div className="server-bar">
           <div className="icon-padding">
-            <img className="user-icon" src={this.props.currentUser.avatar}></img>
+            <img className="user-icon"
+              src={this.props.currentUser.avatar}
+              onClick={() => this.props.history.push(`/channels/@me`)}>
+            </img>
           </div>
           <ul className="server-list">
             {servers.map(server => {
