@@ -15,7 +15,7 @@ const mSTP = ({ session, entities: { users, servers, channels } }) => {
 
 const mDTP = dispatch => {
   return {
-    fetchServer: (id) => dispatch(fetchServer(id)).then(promise => promise.server.channels.forEach(id => dispatch(fetchChannel(id)))), //????????????????????????
+    fetchServer: (id) => dispatch(fetchServer(id)).then(() => dispatch(fetchChannels(id))), //????????????????????????
     fetchChannels: (server_id) => dispatch(fetchChannels(server_id)),
     fetchChannel: (id) => dispatch(fetchChannel(id)),
     createChannel: (channel) => dispatch(createChannel(channel)),

@@ -17,17 +17,6 @@ class ServerIndex extends React.Component {
     this.props.fetchServers();
   }
 
-  // handleClick(e) {
-  //   e.preventDefault();
-  //   const server = this.props.server;
-  //   this.props.history.push(`/channels/${server.id}/${server.channels[0]}`)
-  // }
-
-  // handleContextMenu(e) {
-  //   e.preventDefault();
-  //   dispatch(openModal('server menu'))
-  // }
-
   render() {
     const { servers } = this.props;
 
@@ -48,16 +37,16 @@ class ServerIndex extends React.Component {
             {servers.map(server => {
               return (
                 <li 
-                  // onClick={this.handleClick}
-                  className="icon-padding"
-                  server={server}
-                  // onContextMenu={this.handleContextMenu}
-                  key={server.id}>
+                // onClick={this.handleClick}
+                className="icon-padding"
+                server={server}
+                // onContextMenu={this.handleContextMenu}
+                key={server.id}>
                       <ServerIndexItem 
                         server={server} 
                         deleteServer={this.props.deleteServer}
                         updateServer={this.props.updateServer}
-                      />
+                        />
                 </li>
               )
             })}
@@ -67,6 +56,11 @@ class ServerIndex extends React.Component {
               onClick={() => dispatch(openModal('create server'))}
               className="add-server">+</button>
           </div>
+        </div>
+        <div className="icon-padding">
+          <button
+            onClick={() => this.props.logout()}
+            className="server-logout">Logout</button>
         </div>
       </div>
     )

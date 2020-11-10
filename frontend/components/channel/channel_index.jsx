@@ -9,14 +9,14 @@ class ChannelIndex extends React.Component {
     super(props);
     this.state = {
       name: "",
-      server_id: this.props.match.params.serverId
+      server_id: parseInt(this.props.match.params.serverId)
     }
     // this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchServer(parseInt(this.props.match.params.serverId));
+    this.props.fetchChannels(parseInt(this.props.match.params.serverId));
     // this.props.fetchChannels(this.props.match.params.serverId);
     // .then(() => (
     // this.state.entities.servers[parseInt(this.props.match.params.serverId)].channels.forEach(channel => {
@@ -26,9 +26,10 @@ class ChannelIndex extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.location !== this.props.location) {
-      this.props.clearChannels().then(() => 
-      this.props.fetchServer(parseInt(this.props.match.params.serverId)));
-      // this.props.fetchChannels(this.props.match.params.serverId);
+      this.setState(
+        {server_id: parseInt(this.props.match.params.serverId)},
+        () => this.props.fetchChannels(parseInt(this.props.match.params.serverId))
+      )
     }
   }
 
@@ -40,11 +41,16 @@ class ChannelIndex extends React.Component {
 
 
   handleSubmit(e) {
-    const { serverId } = this.props.match.params;
+    const serverId = parseInt(this.props.match.params.serverId);
     e.preventDefault();
     const channel = Object.assign({}, this.state);
-    this.setState({ name: "" }, () => (this.props.createChannel(channel)
-      .then(promise => this.props.history.push(`/channels/${serverId}/${promise.channel.id}`))));
+    this.setState(
+      { name: "" }, 
+      () => this.props.createChannel(channel)
+        .then(promise => {
+          this.props.history.push(`/channels/${serverId}/${promise.channel.id}`);
+        })
+    );
   }
 
   render() {
@@ -61,18 +67,6 @@ class ChannelIndex extends React.Component {
       }
     }
     
-    // const [servers, channels] = [this.props.servers, this.props.channels];
-    // let display;    
-    // if (channels.length < 1) {
-    //   display = "";
-    //   return null;
-    // } else {
-    //   let channel = channels.find(channel => channel.id === parseInt(this.props.match.params.channelId));
-    //   if (channel){
-    //     display = channel.name;
-    //   }
-    // }
-    // const channel = Object.values[this.props.channels][this.props.match.params.channelId];
     return (
       <div className="channel-wrapper">
         <div className="channel-bar">

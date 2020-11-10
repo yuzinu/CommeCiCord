@@ -1,7 +1,7 @@
 class Api::ChannelsController < ApplicationController
   def index
     # @channels = Channel.includes(:messages).where(server_id: params[:server_id])
-    @channels = Channel.all
+    @channels = Channel.includes(:messages).where(server_id: params[:server_id])
     render :index
   end
 
