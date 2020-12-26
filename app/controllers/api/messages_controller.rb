@@ -1,12 +1,12 @@
 class Api::MessagesController < ApplicationController
   def index
-    @messages = Message.all
+    @messages = Message.includes(:author).all
     # @messages = Message.where(messageable_id: params[:messageable_id], messageable_type: "Channel")
     render :index
   end
 
   def show
-    @message = Message.find(params[:id])
+    @message = Message.includes(:author).find(params[:id])
     if @message
       render :show
     else

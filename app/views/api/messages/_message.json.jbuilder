@@ -1,5 +1,5 @@
 json.extract! message, :id
-json.author message.author_id
+json.author message.author.username
 json.type message.messageable_type
 json.channel_id message.messageable_id if message.messageable_type == "Channel"
 json.dm_id message.messageable_id if message.messageable_type == "DM"

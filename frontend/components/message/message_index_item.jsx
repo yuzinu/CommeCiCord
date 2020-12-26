@@ -16,8 +16,12 @@ class MessageIndexItem extends React.Component {
 
   // use dynamic selector
   render() {
+    console.log(this.props.message);
     return (
+      <>
+        <h1 className="icon-padding">{this.props.message.author}</h1>
         <h1 className="icon-padding">{this.props.message.body}</h1>
+      </>
     )
   }
 }

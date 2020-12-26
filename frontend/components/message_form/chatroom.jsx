@@ -60,7 +60,11 @@ class ChatRoom extends React.Component {
       messageList = currentChannelMessages.map((message, idx) => {
         return (
           <li key={message.id}>
-            {message.body} 
+            <div>
+              {message.author}
+              {`\n`}
+              {message.body}
+            </div>
             <div ref={this.bottom} />
           </li>
         );

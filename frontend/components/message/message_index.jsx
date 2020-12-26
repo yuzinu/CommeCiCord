@@ -52,6 +52,7 @@ class MessageIndex extends React.Component {
           {/* <h1>{messages[0].body}</h1> */}
           <ul className="message-list">
             {messages.map(message => {
+              debugger
               return (
                 <li 
                   className="icon-padding"
