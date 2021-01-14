@@ -11,8 +11,24 @@ class Main extends React.Component {
   }
 
   render() {
-    return (
-      <>
+    if (this.props.match.path === "/channels/@me") {
+      return (
+        <div className="main-wrapper">
+          <div className="main-servers">
+            <ServerIndexContainer />
+          </div>
+          <div className="main-channels">
+            <div className="friends-list">
+              Friendship functionality currently in the works.
+              <br/>
+              Please click on one of the server icons to chat!
+            </div>
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <>
         <div className="main-wrapper">
           <div className="main-servers">
             <ServerIndexContainer />
@@ -25,12 +41,13 @@ class Main extends React.Component {
           </div>
           {/* <div className="main-messages">
             <Switch>
-              <ProtectedRoute exact path="/channels/:serverId/:channelId" component={MessageIndexContainer} />
+            <ProtectedRoute exact path="/channels/:serverId/:channelId" component={MessageIndexContainer} />
             </Switch>
           </div> */}
         </div>
       </>
-    )
+      )
+    }
   }
 }
 
