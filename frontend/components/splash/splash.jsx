@@ -11,7 +11,6 @@ class Splash extends React.Component {
     return (
       <>
         <HeroContainer />
-        <div>Thank you for visiting!</div>
       </>
     )
   }
