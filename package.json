@@ -1,5 +1,5 @@
 {
-  "name": "CommeCi",
+  "name": "CommeCiCord",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.11.6",
@@ -19,7 +19,7 @@
   },
   "description": "This README would normally document whatever steps are necessary to get the application up and running.",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "ccc.js",
   "directories": {
     "lib": "lib",
     "test": "test"
