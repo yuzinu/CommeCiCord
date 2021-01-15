@@ -5,7 +5,7 @@ import configureStore from './store/store';
 import {fetchServers} from './actions/server_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const root = document.getElementById('root');
+  const root = document.getElementById("root");
   let store;
 
   if (window.currentUser) {
