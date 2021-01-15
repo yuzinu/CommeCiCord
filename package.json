@@ -19,7 +19,7 @@
   },
   "description": "This README would normally document whatever steps are necessary to get the application up and running.",
   "version": "1.0.0",
-  "main": "ccc.js",
+  "main": "index.js",
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -32,7 +32,7 @@
     "test": "jest --verbose --silent",
     "test:watch": "jest --verbose --silent --watch",
     "build": "webpack",
-    "build:watch": "webpack --watch --watch-poll --mode=development",
+    "build:watch": "webpack --watch --mode=development",
     "postinstall": "webpack"
   },
   "repository": {
