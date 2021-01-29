@@ -60,10 +60,16 @@ class ChatRoom extends React.Component {
       messageList = currentChannelMessages.map((message, idx) => {
         return (
           <li key={message.id}>
-            <div>
-              {message.author}
-              {`\n`}
-              {message.body}
+            <div className="message-container">
+              <img className="message-avatar" src={message.avatar}></img>
+              <div className="message-body">
+                <div className="message-author">
+                  {message.author}
+                </div>
+                <div>
+                  {message.body}
+                </div>
+              </div>
             </div>
             <div ref={this.bottom} />
           </li>
@@ -84,7 +90,7 @@ class ChatRoom extends React.Component {
 
     return (
       <div className="chatroom-container">
-        <div>{display}</div>
+        <div className="chatroom-channel">{display}</div>
         {/* <button className="load-button" 
           onClick={this.loadChat.bind(this)}>
           Load Chat History
@@ -92,9 +98,7 @@ class ChatRoom extends React.Component {
         <div className="message-list">
           {messageList}
         </div>
-        <div>
-          <MessageForm props={this.props} currentUser={this.props.currentUser}/>
-        </div>
+        <MessageForm props={this.props} currentChannel={display} currentUser={this.props.currentUser}/>
       </div>
     );
   }

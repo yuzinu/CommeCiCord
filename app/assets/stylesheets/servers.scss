@@ -1,7 +1,7 @@
 .server-wrapper {
   width: 72px;
   height: 100vh;
-  background-color: gray;
+  background-color: rgba($color: #272727, $alpha: 1.0);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@
   height: 100vh;
   overflow-y: scroll;
   scrollbar-width: none;
-  background-color: gray;
+  background-color: rgba($color: #272727, $alpha: 1.0);
 }
 
 .server-list {

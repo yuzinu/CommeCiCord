@@ -9,11 +9,26 @@
   overflow-y: scroll;
   height: 100%;
   width: 100%;
-  border: solid gray 1px;
 }
 
 .load-button {
   position: absolute;
   top: 5px;
   right: 5px;
+}
+
+.message-form {
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.message-form-body {
+  background-color: rgba($color: #5b5b64, $alpha: 1.0);
+  border-radius: 2px;
+  width: 100%;
+  min-height: 48px;
+  margin: 0 10px 20px 10px;
+  padding-left: 12px;
+  box-sizing: border-box;
 }

@@ -1,5 +1,6 @@
 json.extract! message, :id
 json.author message.author.username
+json.avatar(url_for(message.author.avatar)) if message.author.avatar.attached?
 json.type message.messageable_type
 json.channel_id message.messageable_id if message.messageable_type == "Channel"
 json.dm_id message.messageable_id if message.messageable_type == "DM"
