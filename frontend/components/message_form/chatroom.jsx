@@ -51,7 +51,8 @@ class ChatRoom extends React.Component {
 
   render() {
     let messageList = (
-        <li >no messages here yet
+        <li>
+          <div className="message-container">no messages here yet</div>
           <div ref={this.bottom} />
         </li>
     )
@@ -90,7 +91,7 @@ class ChatRoom extends React.Component {
 
     return (
       <div className="chatroom-container">
-        <div className="chatroom-channel">{display}</div>
+        <div className="chatroom-channel"># {display}</div>
         {/* <button className="load-button" 
           onClick={this.loadChat.bind(this)}>
           Load Chat History

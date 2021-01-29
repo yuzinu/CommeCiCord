@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px;
+  width: 100%;
   justify-content: center;
 }
 .message-list {
@@ -25,10 +25,10 @@
 
 .message-form-body {
   background-color: rgba($color: #5b5b64, $alpha: 1.0);
-  border-radius: 2px;
+  border-radius: 7px;
   width: 100%;
   min-height: 48px;
-  margin: 0 10px 20px 10px;
+  margin: 0 20px 20px 20px;
   padding-left: 12px;
   box-sizing: border-box;
 }
