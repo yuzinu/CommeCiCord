@@ -26,7 +26,7 @@ class Api::ServersController < ApplicationController
 
   def update
     @server = Server.find_by(id: params[:id])
-    if @server.owner_id === current_user.id
+    if @server.owner_id == current_user.id
       if @server.update(server_params)
         render :show
       else
@@ -39,7 +39,7 @@ class Api::ServersController < ApplicationController
 
   def destroy
     @server = Server.find_by(id: params[:id])
-    if @server.owner_id === current_user.id
+    if @server.owner_id == current_user.id
       if @server.destroy
         render :show
       else

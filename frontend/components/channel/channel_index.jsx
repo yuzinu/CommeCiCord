@@ -1,8 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import ChannelIndexItem from './channel_index_item';
-import ChatRoomContainer from '../message_form/chatroom_container';
 import { openModal, closeModal } from '../../actions/modal_actions';
+import { logout } from '../../actions/session_actions';
+import { fetchServer } from '../../actions/server_actions';
+import { fetchChannel, fetchChannels, createChannel, updateChannel, deleteChannel, clearChannels } from '../../actions/channel_actions';
+import ChannelIndexItem from './channel_index_item';
+import ChatRoom from '../message_form/chatroom';
 
 class ChannelIndex extends React.Component {
   constructor(props) {
@@ -11,17 +15,11 @@ class ChannelIndex extends React.Component {
       name: "",
       server_id: parseInt(this.props.match.params.serverId)
     }
-    // this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchChannels(parseInt(this.props.match.params.serverId));
-    // this.props.fetchChannels(this.props.match.params.serverId);
-    // .then(() => (
-    // this.state.entities.servers[parseInt(this.props.match.params.serverId)].channels.forEach(channel => {
-    //   this.props.fetchChannel(channel.id);
-    // })));
   }
 
   componentDidUpdate(prevProps) {
@@ -99,11 +97,32 @@ class ChannelIndex extends React.Component {
           </form>
         </div>
         <div className="message-wrapper">
-          <ChatRoomContainer />
+          <ChatRoom />
         </div>
       </div>
     )
   }
 }
 
-export default withRouter(ChannelIndex);
+const mSTP = ({ session, entities: { users, servers, channels } }) => {
+  return {
+    currentUser: users[session.id],
+    channels: Object.values(channels),
+    servers: Object.values(servers)
+  };
+};
+
+const mDTP = dispatch => {
+  return {
+    fetchServer: (id) => dispatch(fetchServer(id)).then(() => dispatch(fetchChannels(id))), //????????????????????????
+    fetchChannels: (server_id) => dispatch(fetchChannels(server_id)),
+    fetchChannel: (id) => dispatch(fetchChannel(id)),
+    createChannel: (channel) => dispatch(createChannel(channel)),
+    updateChannel: (channel) => dispatch(updateChannel(channel)),
+    deleteChannel: (id) => dispatch(deleteChannel(id)),
+    clearChannels: () => dispatch(clearChannels()),
+    logout: () => dispatch(logout()),
+  };
+};
+
+export default withRouter(connect(mSTP, mDTP)(ChannelIndex));

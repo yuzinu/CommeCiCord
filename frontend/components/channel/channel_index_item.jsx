@@ -13,6 +13,11 @@ class ChannelIndexItem extends React.Component {
     const channel = this.props.channel;
     this.props.history.push(`/channels/${serverId}/${channel.id}`);
   }
+
+  // handleContextMenu(e) {
+  //   e.preventDefault();
+
+  // }
   // use dynamic selector
   render() {
     return (

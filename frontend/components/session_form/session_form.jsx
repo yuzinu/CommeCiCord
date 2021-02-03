@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Typed from 'typed.js';
-// import SessionAni from '../session_ani/session_ani';
 
 class SessionForm extends React.Component {
   constructor(props) {

@@ -1,5 +1,5 @@
 import * as UserAPI from "../util/user_api_util";
-
+import { receiveCurrentUser } from "../actions/session_actions"
 export const RECEIVE_ALL_USERS = "RECEIVE_ALL_USERS";
 export const RECEIVE_USER = "RECEIVE_USER";
 
@@ -25,9 +25,12 @@ export const fetchUsers = () => dispatch => {
 }
 
 export const updateUser = (user) => dispatch => {
- 
-  return UserAPI.updateUser(user)
-    .then(user => dispatch(receiveUser(user)))
+  if (user.id === "1") {
+    alert("You can't change demo user credentials")
+  }
+  return UserAPI.updateUser(user.id, user.credentials)
+    .then(user => dispatch(receiveUser(user)
+    ));
 }
 
 // export const fetchServers = () => dispatch => {

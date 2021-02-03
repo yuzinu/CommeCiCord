@@ -1,6 +1,7 @@
 import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
+import UpdateUserForm from './update_user_form';
 import CreateServerFormContainer from './create_server_form_container';
 import ServerMenuContainer from './server_menu_container';
 
@@ -10,6 +11,9 @@ function Modal({modal, closeModal}) {
   }
   let component;
   switch (modal) {
+    case 'update user':
+      component = <UpdateUserForm />;
+      break;
     case 'create server':
       component = <CreateServerFormContainer />;
       break;

@@ -16,9 +16,7 @@ user1 = User.create!(
   password: "junipoo"
 );
 
-user1_avatar = open(
-  "https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/84347669_196201305091007_7739894654890673432_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=111&_nc_ohc=jlMrHeiouJEAX8Y9UQ5&tp=1&oh=9485453d60d8060940e69470ed6c3c2e&oe=6017E4E1"
-);
+user1_avatar = File.open(File.join(Rails.root,'app/assets/images/juni_avatar.jpg'));
 
 user1.avatar.attach(
   io: user1_avatar, 
@@ -31,9 +29,7 @@ server1 = Server.create!(
   owner_id: user1.id
 );
 
-server1_icon = open(
-  "https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/58468418_111314526749768_4431244839392208551_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=108&_nc_ohc=A6-DmoQIPNkAX-WwOkh&tp=1&oh=77f38ed6911ac4860e8f0f56e42cae7f&oe=6017F2AC"
-);
+server1_icon = File.open(File.join(Rails.root,'app/assets/images/jumi_avatar.jpg'));
 
 server1.icon.attach(
   io: server1_icon, 

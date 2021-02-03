@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 
 import Modal from './modal/modal';
-import MainContainer from './main_container';
+import Main from './main';
 import SplashContainer from './splash/splash_container';
 import SignUpFormContainer from './session_form/signup_form_container';
 import SessionFormContainer from './session_form/session_form_container';
@@ -19,9 +19,9 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util';
 const App = () => (
   <>
     <Modal />
-    <ProtectedRoute exact path="/channels/@me" component={MainContainer} />
+    <ProtectedRoute exact path="/channels/@me" component={Main} />
     <Switch>
-      <ProtectedRoute exact path="/channels/:serverId/:channelId" component={MainContainer} />
+      <ProtectedRoute exact path="/channels/:serverId/:channelId" component={Main} />
       <AuthRoute exact path="/login" component={SessionFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
     </Switch>

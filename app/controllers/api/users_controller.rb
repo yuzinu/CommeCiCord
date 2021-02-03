@@ -14,7 +14,18 @@ class Api::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
+    # TODO ADD AVATAR FUNCTIONALITY
+    # if params[:avatar]
+    #   @user.avatar.attach(
+    #     io: params[:avatar], 
+    #     filename: `#{@user.username}_avatar.jpeg`, 
+    #     content_type: 'image/jpeg'
+    #   )
+    # else
+    #   @user.avatar.attach(
+    #     io: @user.username
+    #   )
+    # end
     if @user.save
       login!(@user)
       render "api/users/show"
@@ -25,7 +36,9 @@ class Api::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
+    if params[:id] == "1"
+      render json: ["You cannot change demo user credentials"], status: 403
+    elsif @user.update(user_params)
       render "/api/users/show"
     else
       render json: @user.errors.full_messages, status: 422
@@ -34,14 +47,18 @@ class Api::UsersController < ApplicationController
 
   # TODO method to delete user
   # they must first transfer server ownerships first or delete all owned servers
-  # def destroy
-  #   @user = User.find(params[:id])
-  #   if @user.servers.length == 0 && @user.destroy
-  #     render ""
-  #   else
-  #     render json: @user.errors.full_messages, status: 422
-  #   end
-  # end
+  def destroy
+    @user = User.find(params[:id])
+    if @user.own_servers.length == 0
+      if @user.destroy
+        render "/api/users/show"
+      else
+        render json: @user.errors.full_messages, status: 422
+      end
+    else
+      render json: ["Please transfer ownership of all servers or delete all servers your own"], status: 403
+    end
+  end
 
   private
 

@@ -15,7 +15,7 @@ class MessageForm extends React.Component {
     e.preventDefault();
     App.cable.subscriptions.subscriptions[0].speak({ 
       body: this.state.body,
-      messageable_id: this.props.props.match.params.channelId, 
+      messageable_id: this.props.match.params.channelId, 
       messageable_type: "Channel", 
       author_id: this.props.currentUser.id
     });

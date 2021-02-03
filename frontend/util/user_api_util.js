@@ -20,13 +20,13 @@ export const createUser = (user) => (
   })
 );
 
-export const updateUser = (user) => (
-  $.ajax({
+export const updateUser = (userId, user) => {
+  return $.ajax({
     method: 'PATCH',
-    url: `/api/users/${user.id}`,
+    url: `/api/users/${userId}`,
     data: {user}
   })
-);
+};
 
 export const deleteUser = (userId) => (
   $.ajax({
