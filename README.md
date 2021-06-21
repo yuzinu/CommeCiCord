@@ -1,24 +1,8 @@
-# README
+# CommeCiCord
+A fullstack clone of Discord, a popular messaging and voice chatting application built with Ruby on Rails, React, Redux, and PostgreSQL
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Features
+- Custom User Authentication using BCrypt
+- Servers and Channels stored in PostgreSQL
+- State managed by Redux
+- Live Chat implemented with Action Cable WebSockets
