@@ -1,5 +1,6 @@
 # CommeCiCord
 A fullstack clone of Discord, a popular messaging and voice chatting application built with Ruby on Rails, React, Redux, and PostgreSQL
+[live site](https://comme-ci-cord.herokuapp.com/#/)
 
 ### Features
 - Custom User Authentication using BCrypt
