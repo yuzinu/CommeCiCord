@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { openModal, closeModal } from '../../actions/modal_actions';
+import { fetchServers, createServer } from '../../actions/server_actions';
 
 class CreateServerForm extends React.Component {
   constructor(props) {
@@ -45,4 +48,19 @@ class CreateServerForm extends React.Component {
   }
 }
 
-export default withRouter(CreateServerForm);
+const mSTP = ({ session, entities: { users } }) => {
+  return {
+    currentUser: users[session.id],
+  };
+};
+
+const mDTP = dispatch => {
+  return {
+    fetchServers: () => dispatch(fetchServers()),
+    createServer: (server) => dispatch(createServer(server)),
+    openModal: (modal) => dispatch(openModal(modal)),
+    closeModal: () => dispatch(closeModal())
+  };
+};
+
+export default connect(mSTP, mDTP)(CreateServerForm);

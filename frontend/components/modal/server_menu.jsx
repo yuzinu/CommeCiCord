@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { openModal, closeModal } from '../../actions/modal_actions';
+import { fetchServers, createServer, deleteServer } from '../../actions/server_actions';
 
 class ServerMenu extends React.Component {
   constructor(props) {
@@ -30,4 +33,21 @@ class ServerMenu extends React.Component {
   }
 }
 
-export default ServerMenu;
+const mSTP = (state, ownProps) => {
+  return {
+    currentUser: state.entities.users[state.session.id],
+    serverId: location.hash.spliy
+  };
+};
+
+const mDTP = dispatch => {
+  return {
+    fetchServers: () => dispatch(fetchServers()),
+    createServer: (server) => dispatch(createServer(server)),
+    deleteServer: (serverId) => dispatch(deleteServer(serverId)),
+    openModal: (modal) => dispatch(openModal(modal)),
+    closeModal: () => dispatch(closeModal())
+  };
+};
+
+export default connect(mSTP, mDTP)(ServerMenu);

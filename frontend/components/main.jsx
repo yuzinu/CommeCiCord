@@ -15,22 +15,24 @@ class Main extends React.Component {
   render() {
     if (this.props.match.path === "/channels/@me") {
       return (
-        <div className="main-wrapper">
-          <div className="main-servers">
-            <ServerIndex />
-          </div>
-          <div className="main-channels">
-            <div className="friends-list">
-              Friendship functionality currently in the works.
-              <br/>
-              Please click on one of the server icons to chat!
+        <>
+          <div className="main-wrapper">
+            <div className="main-servers">
+              <ServerIndex />
             </div>
-            <button
-              onClick={() => dispatch(openModal('update user'))}
-              className="add-server"
-            >Update User Info</button>
+            <div className="main-channels">
+              <div className="friends-list">
+                Friendship functionality currently in the works.
+                <br/>
+                Please click on one of the server icons to chat!
+              </div>
+              <button
+                onClick={() => dispatch(openModal('update user'))}
+                className="add-server"
+              >Update User Info</button>
+            </div>
           </div>
-        </div>
+        </>
       )
     } else {
       return (

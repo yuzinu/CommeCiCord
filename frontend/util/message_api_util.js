@@ -30,9 +30,9 @@ export const updateMessage = (message) => (
   })
 );
 
-export const deleteMessage = (messageId) => (
+export const deleteMessage = (id) => (
   $.ajax({
     method: 'DELETE',
-    url: `/api/messages/${messageId}`
+    url: `/api/messages/${id}`
   })
 );
