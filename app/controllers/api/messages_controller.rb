@@ -37,9 +37,8 @@ class Api::MessagesController < ApplicationController
     @message = Message.find(params[:id])
     if @message && @message.author_id == current_user.id
       if @message.update(message_params)
-        render :show
-        # socket = JSON.parse(render :show)
-        # ChatChannel.broadcast_to('chat_channel', socket)
+        socket = JSON.parse(render :show)
+        ChatChannel.broadcast_to('chat_channel', socket)
       else
         render json: @message.errors.full_messages, status: 422
       end

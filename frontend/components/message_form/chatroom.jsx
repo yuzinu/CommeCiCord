@@ -47,9 +47,6 @@ class ChatRoom extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.location !== this.props.location) {
       let channelId = parseInt(this.props.match.params.channelId) 
-      // this.setState(
-      //   {messsageable_id: channelId},
-      //   () => 
         this.props.fetchMessages(channelId)
       // )
     }
@@ -89,10 +86,6 @@ class ChatRoom extends React.Component {
     return (
       <div className="chatroom-container">
         <div className="chatroom-channel"># {display}</div>
-        {/* <button className="load-button" 
-          onClick={this.loadChat.bind(this)}>
-          Load Chat History
-        </button> */}
         <div className="message-list">
           {messageList}
         </div>
