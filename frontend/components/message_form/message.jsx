@@ -10,13 +10,14 @@ class Message extends React.Component {
 
     this.state = {message: this.props.message,
                   body: this.props.message.body,
-                  isEditting: false};
+                  isEditting: false,
+                 }; 
     this.toggleEdit = this.toggleEdit.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.message !== prevState.message) {
-      this.setState({message: this.state.message})
+  componentDidUpdate(prevProps) {
+    if (this.props.message !== prevProps.message) {
+      this.setState({message: this.props.message})
     }
   }
 
@@ -25,20 +26,20 @@ class Message extends React.Component {
   }
 
   update(e) {
-    // debugger
     e.preventDefault();      
     this.setState({ body: e.target.value });
   }
 
   render() {
     let message = this.state.message;
-    // debugger
     return (
       <div className="message-container">
         <img className="message-avatar" src={message.avatar}></img>
-        <div className="message-body">
-          <div className="message-author">{message.author}</div>
-          <div>{message.created_at}</div>
+        <div className="message-contents">
+          <div className="message-head">
+            <div className="message-author">{message.author}</div>
+            <div className="message-timestamp">{message.created_at}</div>
+          </div>
           {(!this.state.isEditting) ? 
             <div>{message.body}</div> : 
             <MessageEditForm 
@@ -51,12 +52,14 @@ class Message extends React.Component {
               currentUser={this.props.currentUser}
               />
           }
-          {(!this.state.isEditting && message.author_id === this.props.currentUser.id) ?
-            <button onClick={this.toggleEdit}>Edit</button> :
-            null
-          }
-          <button onClick={() => this.props.deleteMessage(message.id)}>Delete</button>
         </div>
+        {(!this.state.isEditting && message.author_id === this.props.currentUser.id) ?
+          <div className="message-options">
+            <button className="" onClick={this.toggleEdit}>Edit</button>
+            <button className="" onClick={() => this.props.deleteMessage(message.id)}>Delete</button>
+          </div> :
+          null
+        }
       </div>
     )
   }

@@ -20,6 +20,7 @@
 .message-form {
   width: 100%;
   display: flex;
+  align-items: center;
   box-sizing: border-box;
 }
 
@@ -28,7 +29,17 @@
   border-radius: 7px;
   width: 100%;
   min-height: 48px;
-  margin: 0 20px 20px 20px;
+  margin: 20px 20px 20px 20px;
   padding-left: 12px;
+  box-sizing: border-box;
+}
+
+.message-edit-form-body {
+  background-color: rgba($color: #5b5b64, $alpha: 1.0);
+  border-radius: 7px;
+  width: 100%;
+  min-height: 48px;
+  margin: 5px 0;
+  padding: 12px;
   box-sizing: border-box;
 }

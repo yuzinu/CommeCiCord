@@ -50,18 +50,33 @@
   width: 100%;
   display: inherit;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 10px 20px;
 }
 
-.message-body {
+.message-contents {
   padding-left: 10px;
   display: inherit;
+  width: 100%;
   flex-direction: column;
   justify-content: space-evenly;
 }
 
+.message-timestamp {
+  display: inline-block;
+  padding-left: 10px;
+  font-size: 11px;
+  align-self: flex-end;
+}
+
 .message-author {
   font-weight: 700;
+}
+
+.message-options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 13px;
 }
 
 // .message-icon {
