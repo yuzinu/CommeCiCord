@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { fetchUsers } from '../../actions/user_actions';
 import { fetchMessages, deleteMessage, createMessage, fetchMessage } from '../../actions/message_actions';
 import { fetchChannels } from '../../actions/channel_actions';
+import Message from "./message";
 import MessageForm from "./message_form";
 
 class ChatRoom extends React.Component {
@@ -17,11 +18,12 @@ class ChatRoom extends React.Component {
   
   componentDidMount() {
     let fetchMessage = this.props.fetchMessage.bind(this);
-    this.props.fetchMessages();
-    this.props.fetchUsers();
+    let channelId = this.props.match.params.channelId;
+    this.props.fetchMessages(channelId);
+    // this.props.fetchUsers();
 
     App.cable.subscriptions.create(
-      { channel: "ChatChannel", channelId: this.props.match.params.channelId },
+      { channel: "ChatChannel", messageable_id: channelId },
       {
         received: data => {
           fetchMessage(data.id);
@@ -29,7 +31,10 @@ class ChatRoom extends React.Component {
         speak: function(data) {
           return this.perform("speak", data)
         },
-      load: function() {return this.perform("load")}
+        update: function(data) {
+          return this.perform("update", data)
+        },
+        load: function() {return this.perform("load")}
       }
     );
   }
@@ -39,21 +44,20 @@ class ChatRoom extends React.Component {
   //   App.cable.subscriptions.subscriptions[0].load();
   // }
   
-  componentDidUpdate() {
-    this.bottom.current.scrollIntoView();
+  componentDidUpdate(prevProps) {
+    if (prevProps.location !== this.props.location) {
+      let channelId = parseInt(this.props.match.params.channelId) 
+      // this.setState(
+      //   {messsageable_id: channelId},
+      //   () => 
+        this.props.fetchMessages(channelId)
+      // )
+    }
+    if (this.bottom && this.bottom.current) {
+      this.bottom.current.scrollIntoView();
+    }
   }
   
-  currentMessages() {
-    let messages = this.props.messages;
-    let channelId = this.props.channelId;
-
-    let channelMessages = [];
-    if (messages.length > 0) {
-      channelMessages = messages.filter(message => (message.channel_id === channelId))
-    }
-    return channelMessages;
-  }
-
   render() {
     let messageList = (
         <li>
@@ -61,27 +65,15 @@ class ChatRoom extends React.Component {
           <div ref={this.bottom} />
         </li>
     )
-    let currentChannelMessages = this.currentMessages();
-    if (currentChannelMessages.length > 0) {
-      messageList = currentChannelMessages.map((message, idx) => {
-        return (
-          <li key={message.id}>
-            <div className="message-container">
-              <img className="message-avatar" src={message.avatar}></img>
-              <div className="message-body">
-                <div className="message-author">
-                  {message.author}
-                </div>
-                <div>
-                  {message.body}
-                </div>
-              </div>
-            </div>
-            <div ref={this.bottom} />
-          </li>
-        );
-      });
-    } 
+
+    messageList = this.props.messages.map((message, idx) => {
+      return (
+        <li key={message.id}>
+          <Message message={message} {...this.props} />
+          <div ref={this.bottom}></div>
+        </li>
+      );
+    });
 
     const channels = this.props.channels;
     let display;    
@@ -126,7 +118,7 @@ const mDTP = dispatch => {
   return {
     fetchUsers: () => dispatch(fetchUsers()),
     fetchChannels: () => dispatch(fetchChannels()),
-    fetchMessages: () => dispatch(fetchMessages()),
+    fetchMessages: (channelId) => dispatch(fetchMessages(channelId)),
     fetchMessage: (message) => dispatch(fetchMessage(message)),
     createMessage: (message) => dispatch(createMessage(message)),
     deleteMessage: (id) => dispatch(deleteMessage(id)),

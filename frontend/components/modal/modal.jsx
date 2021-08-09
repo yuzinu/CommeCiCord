@@ -2,8 +2,8 @@ import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import UpdateUserForm from './update_user_form';
-import CreateServerFormContainer from './create_server_form_container';
-import ServerMenuContainer from './server_menu_container';
+import CreateServerForm from './create_server_form';
+import ServerMenu from './server_menu';
 
 function Modal({modal, closeModal}) {
   if (!modal) {
@@ -15,14 +15,15 @@ function Modal({modal, closeModal}) {
       component = <UpdateUserForm />;
       break;
     case 'create server':
-      component = <CreateServerFormContainer />;
+      component = <CreateServerForm />;
       break;
     case 'server menu':
-      component = <ServerMenuContainer />;
+      component = <ServerMenu />;
       break;
     default:
       return null;
   }
+  
   return (
     <div className="modal-background" onClick={closeModal}>
       <div className="modal-child" onClick={e => e.stopPropagation()}>

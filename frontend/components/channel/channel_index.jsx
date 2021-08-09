@@ -24,9 +24,10 @@ class ChannelIndex extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.location !== this.props.location) {
+      let serverId = parseInt(this.props.match.params.serverId)
       this.setState(
-        {server_id: parseInt(this.props.match.params.serverId)},
-        () => this.props.fetchChannels(parseInt(this.props.match.params.serverId))
+        {serverId: serverId},
+        () => this.props.fetchChannels(serverId)
       )
     }
   }
@@ -115,7 +116,7 @@ const mSTP = ({ session, entities: { users, servers, channels } }) => {
 const mDTP = dispatch => {
   return {
     fetchServer: (id) => dispatch(fetchServer(id)).then(() => dispatch(fetchChannels(id))), //????????????????????????
-    fetchChannels: (server_id) => dispatch(fetchChannels(server_id)),
+    fetchChannels: (serverId) => dispatch(fetchChannels(serverId)),
     fetchChannel: (id) => dispatch(fetchChannel(id)),
     createChannel: (channel) => dispatch(createChannel(channel)),
     updateChannel: (channel) => dispatch(updateChannel(channel)),

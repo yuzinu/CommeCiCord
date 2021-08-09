@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 class ServerIndexItem extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
   }
 
   // handleClick(e) {
@@ -15,11 +15,11 @@ class ServerIndexItem extends React.Component {
   // }
 
   
-  handleClick(e) {
-    e.preventDefault();
-    const server = this.props.server;
-    this.props.history.push(`/channels/${server.id}/${server.channels[0]}`)
-  }
+  // handleClick(e) {
+  //   e.preventDefault();
+  //   const server = this.props.server;
+  //   this.props.history.push(`/channels/${server.id}/${server.channels[0]}`)
+  // }
 
   // use dynamic selector
   render() {
@@ -28,19 +28,23 @@ class ServerIndexItem extends React.Component {
     
     if (server.icon) {// <Link to={`${server.id}/${server.channels[0].id}`}>
       return (
-        <img 
-        onClick={this.handleClick}
-        className="server-icon"
-        src={server.icon}>
-        </img>
+        <Link to={`/channels/${server.id}/${server.channels[0]}`}>
+          <img 
+            // onClick={this.handleClick}
+            className="server-icon"
+            src={server.icon}>
+          </img>
+        </Link>
       )
     } else {
       return (
-        <h1
-          onClick={this.handleClick}
-          className="server-initials">
-          {initials}
-        </h1>
+        <Link to={`/channels/${server.id}/${server.channels[0]}`}>
+          <h1
+            // onClick={this.handleClick}
+            className="server-initials">
+            {initials}
+          </h1>
+        </Link>
       )
     }
   }

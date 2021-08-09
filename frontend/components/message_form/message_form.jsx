@@ -33,7 +33,6 @@ class MessageForm extends React.Component {
             onChange={this.update("body")}
             placeholder={`Message #${this.props.currentChannel}`}
           />
-          {/* <input type="submit" /> */}
         </form>
       </>
     );

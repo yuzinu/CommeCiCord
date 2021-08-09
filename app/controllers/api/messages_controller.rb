@@ -1,6 +1,12 @@
 class Api::MessagesController < ApplicationController
   def index
-    @messages = Message.includes(:author).all
+    id, type = params[:messageable_id], params[:messageable_type]
+
+    if type
+      @messages = Message.includes(:author).where(messageable_id: id)
+    else
+      @messages = Message.includes(:author).all
+    end
     # @messages = Message.where(messageable_id: params[:messageable_id], messageable_type: "Channel")
     render :index
   end
@@ -16,12 +22,11 @@ class Api::MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params)
-    @message.channel_id = params[:message][:channel_id]
-    if message.author.id == current_user.id
-      if @channel.save
+    if @message.author_id == current_user.id
+      if @message.save
         render :show
       else
-        render json: @channel.errors.full_messages, status: 422
+        render json: @message.errors.full_messages, status: 422
       end
     else
       render json: ["You do not have permissions to create a channel"]
@@ -29,12 +34,14 @@ class Api::MessagesController < ApplicationController
   end
 
   def update
-    @channel = Channel.find_by(id: params[:id])
-    if @channel.server.owner.id == current_user.id
-      if @channel.update(channel_params)
+    @message = Message.find(params[:id])
+    if @message && @message.author_id == current_user.id
+      if @message.update(message_params)
         render :show
+        # socket = JSON.parse(render :show)
+        # ChatChannel.broadcast_to('chat_channel', socket)
       else
-        render json: @channel.errors.full_messages, status: 422
+        render json: @message.errors.full_messages, status: 422
       end
     else
       render json: ["You do not have permissions to edit this channel"], status: 401
@@ -42,19 +49,19 @@ class Api::MessagesController < ApplicationController
   end
 
   def destroy
-    @channel = Channel.find_by(id: params[:id])
-    if @channel.owner_id === current_user.id
-      if @channel.destroy
+    @message = Message.includes(:author).find(params[:id])
+    if @message.author_id == current_user.id
+      if @message.destroy
         render :show
       else
-        render json: @channel.errors.full_messages, status: 422
+        render json: @message.errors.full_messages, status: 422
       end
     else
-      render json: ["You do not have permissions to delete this channel"], status: 401
+      render json: ["You do not have permissions to delete this message"], status: 403
     end
   end
 
-  def channel_params
-    params.require(:channel).permit(:body, :author_id, :messageable_id, :messageable_type)
+  def message_params
+    params.require(:message).permit(:id, :body, :author_id, :messageable_id, :messageable_type)
   end
 end
